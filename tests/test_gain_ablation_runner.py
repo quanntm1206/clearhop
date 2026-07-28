@@ -30,7 +30,7 @@ class TestGainAblationRunner(unittest.TestCase):
         self.assertTrue(all(item["max_steps"] == 1500 for item in plan))
         self.assertTrue(all(item["scheduler_total_steps"] == 30000 for item in plan))
         self.assertTrue(all(item["config"]["beta_si_sdr"] == 0.015 for item in plan))
-        self.assertTrue(all("gain_calibration\\refine" in str(item["run_dir"]) for item in plan))
+        self.assertTrue(all(Path(item["run_dir"]).parts[-3] == "refine" for item in plan))
 
     def test_refine_requires_exact_locked_arm_and_seeds(self) -> None:
         root = Path(__file__).resolve().parents[1]

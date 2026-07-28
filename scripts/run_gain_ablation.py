@@ -251,11 +251,16 @@ def _resolved_evidence(root: Path, item: dict[str, Any]) -> dict[str, str]:
 
 
 def _resolve_inside(root: Path, value: object) -> Path:
+    root = Path(root).resolve()
     path = Path(str(value))
     resolved = path.resolve() if path.is_absolute() else (root / path).resolve()
-    if resolved != root and root not in resolved.parents:
-        raise ValueError(f"Evidence path escapes project root: {value}")
-    return resolved
+    for ancestor in (resolved, *resolved.parents):
+        try:
+            if ancestor.samefile(root):
+                return root.joinpath(*resolved.parts[len(ancestor.parts) :])
+        except OSError:
+            continue
+    raise ValueError(f"Evidence path escapes project root: {value}")
 
 
 def _artifact_ref(root: Path, path: Path) -> dict[str, str]:

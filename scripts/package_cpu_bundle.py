@@ -12,6 +12,18 @@ from pathlib import Path
 from src.checkpoint import file_sha256
 
 
+def _canonical_inside(root: Path, path: Path) -> Path | None:
+    """Return a root-spelled path, including across Windows 8.3 aliases."""
+    resolved = path.resolve()
+    for ancestor in (resolved, *resolved.parents):
+        try:
+            if ancestor.samefile(root):
+                return root.joinpath(*resolved.parts[len(ancestor.parts) :])
+        except OSError:
+            continue
+    return None
+
+
 def package_cpu_bundle(
     root: Path,
     output: Path,
@@ -26,8 +38,10 @@ def package_cpu_bundle(
     if not output.is_absolute():
         output = root / output
     output = output.resolve()
-    if root not in output.parents:
+    canonical_output = _canonical_inside(root, output)
+    if canonical_output is None or canonical_output == root:
         raise ValueError("bundle output must stay inside project root")
+    output = canonical_output
     inputs = {
         "checkpoint.pth": Path(checkpoint),
         "model.ts": Path(torchscript),
@@ -38,9 +52,10 @@ def package_cpu_bundle(
     }
     for name, path in inputs.items():
         path = path if path.is_absolute() else root / path
-        inputs[name] = path.resolve()
-        if not path.is_file() or root not in path.parents:
+        canonical = _canonical_inside(root, path)
+        if canonical is None or not canonical.is_file():
             raise ValueError(f"missing or out-of-root bundle input: {name}")
+        inputs[name] = canonical
     source_package = root / "src"
     if not source_package.is_dir():
         raise ValueError("missing src runtime package")
