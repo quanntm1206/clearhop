@@ -1,1 +1,6 @@
 artifacts/cpu_bundle/** -text
+configs/research_baselines.json -text
+configs/rnnoise_toolchain.json -text
+containers/rnnoise/Dockerfile -text
+manifests/v2/fold_0_test.jsonl -text
+scripts/setup-rnnoise-baseline.ps1 -text
