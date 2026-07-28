@@ -1,0 +1,69 @@
+{
+  "inputs": {
+    "apt_snapshot": "https://snapshot.ubuntu.com/ubuntu/20260728T000000Z/",
+    "base_image": "ubuntu@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90",
+    "dockerfile": {
+      "path": "containers/rnnoise/Dockerfile",
+      "sha256": "b78cd76cc59436ccfd5ebc23f633a8ff5a51b280798baef82e054578ce3ea37d"
+    },
+    "model": {
+      "archive_sha256": "0a8755f8e2d834eff6a54714ecc7d75f9932e845df35f8b59bc52a7cfe6e8b37",
+      "archive_url": "https://media.xiph.org/rnnoise/models/rnnoise_data-0a8755f8e2d834eff6a54714ecc7d75f9932e845df35f8b59bc52a7cfe6e8b37.tar.gz"
+    },
+    "packages": {
+      "autoconf": "2.71-3",
+      "automake": "1:1.16.5-1.3ubuntu1",
+      "build-essential": "12.10ubuntu1",
+      "ca-certificates": "20260601~24.04.1",
+      "curl": "8.5.0-2ubuntu10.11",
+      "libtool": "2.4.7-7build1",
+      "pkg-config": "1.8.1-2build1"
+    },
+    "platform": "linux/amd64",
+    "registry": {
+      "path": "configs/research_baselines.json",
+      "sha256": "42c2f279e515cb0a00c6e7d983ff7416b85d14cdcd2bfc527e962dcc9860914e"
+    },
+    "setup_script": {
+      "path": "scripts/setup-rnnoise-baseline.ps1",
+      "sha256": "dd9e08281029a1c264b936ebb85deb0993c6b9e0d6686c7e766d4c18ddc61928"
+    },
+    "source": {
+      "archive_sha256": "f61ee0b3f4c4cd337303e003d333357c5eaf25ef5d75a742109ee59e9a0a3932",
+      "archive_url": "https://github.com/xiph/rnnoise/archive/70f1d256acd4b34a572f999a05c87bf00b67730d.tar.gz",
+      "commit": "70f1d256acd4b34a572f999a05c87bf00b67730d"
+    },
+    "toolchain_manifest": {
+      "path": "configs/rnnoise_toolchain.json",
+      "sha256": "dfb718408d3a55fb09b8636aeb17368883dc8e98efc34102e536aff7a50a18c0"
+    }
+  },
+  "outputs": {
+    "files": {
+      "COPYING": "45d37ca1cdb278c088e1aa85e0e65ca3a534ed86a28dcc96ca16810248a61d35",
+      "README": "87fc8de7620259a3200be2012e7c77fc9383997d3224318451eaded27691754f",
+      "SHA256SUMS": "87c8f7914273f6b633d7d991834eac4f5565efe81a8cb27eb1edd8aa54312412",
+      "pinned_commit.txt": "885d9de03e324d5bbdba250c0940ccc39205506be74537c5cf3bb67aa820b9cf",
+      "rnnoise_demo": "edc9d8a06f880ac945896920fdad835408456e8895e0c220bbfaaef92315a78a",
+      "toolchain_packages.txt": "de19250477f5f444686b31aff4a8905000eeab72f91da08a4894af15269cff5d"
+    },
+    "packages": {
+      "autoconf": "2.71-3",
+      "automake": "1:1.16.5-1.3ubuntu1",
+      "build-essential": "12.10ubuntu1",
+      "ca-certificates": "20260601~24.04.1",
+      "curl": "8.5.0-2ubuntu10.11",
+      "libtool": "2.4.7-7build1",
+      "pkg-config": "1.8.1-2build1"
+    },
+    "source_files": {
+      "examples/rnnoise_demo": "edc9d8a06f880ac945896920fdad835408456e8895e0c220bbfaaef92315a78a",
+      "src/rnnoise_data.c": "d6021b7697677c4d2274c912975e143765552b0e6f25500aa660fdb4a9849be5",
+      "src/rnnoise_data.h": "09ff880bddd0fc74a2ae0e5ec6c8d65714031b08d0c3f672493acd9e189c5855"
+    }
+  },
+  "receipt_sha256": "a25ba6f885aff2b6765ace154ad7c2e9a1ca2fd6ff62078a234defe0b9ed9828",
+  "receipt_type": "rnnoise_reproducible_build",
+  "schema_version": 1,
+  "status": "pass"
+}

@@ -9,6 +9,7 @@ import numpy as np
 from scripts.model_comparison import (
     ArrayAdapter,
     BenchmarkItem,
+    canonical_receipt_sha256,
     DeepFilterNet3Adapter,
     FrozenHistoricalAdapter,
     build_default_report,
@@ -88,12 +89,13 @@ class TestModelComparison(unittest.TestCase):
             self.assertEqual(report["models"][0]["status"], "reproduced_local")
             self.assertEqual(report["models"][0]["item_ids"], ["10", "11"])
 
-    def test_default_report_marks_external_models_blocked(self):
+    def test_default_report_imports_deepfilter_receipt_and_blocks_unavailable_models(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "out.json"
             report = build_default_report(Path.cwd(), output=path)
             names = {row["name"]: row["status"] for row in report["models"]}
-            self.assertEqual(names["DeepFilterNet3"], "blocked")
+            self.assertEqual(names["DeepFilterNet3"], "reproduced_local")
+            self.assertEqual(names["RNNoise"], "blocked")
             self.assertTrue(path.exists())
 
     def test_baseline_config_contains_provenance_and_repro_recipe(self):
@@ -124,6 +126,15 @@ class TestModelComparison(unittest.TestCase):
         self.assertEqual(report["schema_version"], 2)
         self.assertTrue(validate_model_comparison(report))
         self.assertTrue(all(row["status"] in {"reproduced_local", "literature_only", "blocked"} for row in report["models"]))
+        self.assertEqual(report["receipt_sha256"], canonical_receipt_sha256(report))
+        registry = report["inputs"]["registry"]
+        manifest = report["inputs"]["manifest"]
+        self.assertEqual(registry["path"], "configs/research_baselines.json")
+        self.assertEqual(registry["sha256"], hashlib.sha256((Path.cwd() / registry["path"]).read_bytes()).hexdigest())
+        self.assertEqual(manifest["path"], "manifests/v2/fold_0_test.jsonl")
+        self.assertIs(manifest["git_tracked"], True)
+        self.assertEqual(manifest["sha256"], hashlib.sha256((Path.cwd() / manifest["path"]).read_bytes()).hexdigest())
+        self.assertEqual(manifest["item_ids_sha256"], hashlib.sha256("\n".join(report["protocol"]["item_ids"]).encode()).hexdigest())
 
 
 if __name__ == "__main__":

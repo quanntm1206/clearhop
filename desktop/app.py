@@ -59,6 +59,8 @@ def _default_pipeline() -> Any:
     configured = os.environ.get("NOISE_REDUCE_CHECKPOINT")
     candidates = [Path(configured)] if configured else []
     candidates += [
+        Path(getattr(sys, "_MEIPASS", Path(sys.executable).resolve().parent)) / "assets" / "checkpoint.pth",
+        Path(sys.prefix).resolve().parent / "assets" / "checkpoint.pth",
         Path.cwd() / "assets" / "checkpoint.pth",
         Path(sys.executable).resolve().parent / "assets" / "checkpoint.pth",
         Path.cwd() / "artifacts" / "cpu_bundle" / "checkpoint.pth",
@@ -327,8 +329,25 @@ def main(argv: list[str] | None = None) -> int:
     if not QT_AVAILABLE:
         print("PySide6 is required. Install with: pip install '.[desktop]'", file=sys.stderr)
         return 2
-    parser = argparse.ArgumentParser(description="Noise Reduce desktop app")
-    parser.parse_args(argv)
+    parser = argparse.ArgumentParser(description="ClearHop desktop app")
+    parser.add_argument("--smoke-input", type=Path, help=argparse.SUPPRESS)
+    parser.add_argument("--smoke-output", type=Path, help=argparse.SUPPRESS)
+    parser.add_argument("--smoke-receipt", type=Path, help=argparse.SUPPRESS)
+    args = parser.parse_args(argv)
+    smoke_values = (args.smoke_input, args.smoke_output, args.smoke_receipt)
+    if any(smoke_values):
+        if not all(smoke_values):
+            parser.error("all packaged-smoke paths are required")
+        try:
+            receipt = _default_pipeline().process_file(
+                args.smoke_input,
+                args.smoke_output,
+                receipt_path=args.smoke_receipt,
+            )
+            return 0 if receipt.get("status") == "pass" and args.smoke_output.is_file() and args.smoke_receipt.is_file() else 1
+        except Exception as exc:
+            print(f"Packaged smoke failed: {type(exc).__name__}: {exc}", file=sys.stderr)
+            return 1
     app = QApplication.instance() or QApplication(sys.argv)
     window = MainWindow()
     window.show()

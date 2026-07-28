@@ -52,17 +52,24 @@
       "native_sample_rate": 48000,
       "runtime": "external-cli",
       "weights_bundled": false,
-      "evidence_class": "blocked",
-      "command": null,
+      "evidence_class": "reproduced_local",
+      "command": "python scripts/reproduce_deepfilternet3.py --model-dir <external-cache>/DeepFilterNet3 --model-archive <external-cache>/DeepFilterNet3.zip",
       "provenance": {
         "commit": "d375b2d8309e0935d165700c91da9de862a99c31",
         "commit_url": "https://github.com/Rikorose/DeepFilterNet/commit/d375b2d8309e0935d165700c91da9de862a99c31",
         "version": "v0.5.6 release; source commit pinned",
         "retrieved_at": "2026-07-28",
-        "weight_sha256": null,
-        "weight_sha256_reason": "upstream release asset not downloaded; redistribution review pending"
+        "weight_sha256": "23b92884f63ccf54bb026014604625ab231657b6480df65db4095c4c171e6003",
+        "model_archive_sha256": "49c52edc8947ae1f9bf50d81530beaf3a2c3245aeaf34b6f31ff535cd22284d2",
+        "model_archive_url": "https://raw.githubusercontent.com/Rikorose/DeepFilterNet/d375b2d8309e0935d165700c91da9de862a99c31/models/DeepFilterNet3.zip"
       },
-      "recipe": "Install the upstream deep-filter v0.5.6 release; configure command argv with {input}/{output}; rerun this script."
+      "reproduction": {
+        "receipt": "reports/public/deepfilternet3_reproduction.json",
+        "command": "python scripts/reproduce_deepfilternet3.py --model-dir <external-cache>/DeepFilterNet3 --model-archive <external-cache>/DeepFilterNet3.zip",
+        "pinned_commit": "d375b2d8309e0935d165700c91da9de862a99c31",
+        "status": "reproduced_local"
+      },
+      "recipe": "Download the pinned DeepFilterNet3 archive outside Git, verify SHA-256, then run the reproduction command on the frozen 500-item primary slice."
     },
     {
       "name": "RNNoise",
@@ -80,6 +87,18 @@
         "retrieved_at": "2026-07-28",
         "weight_sha256": null,
         "weight_sha256_reason": "upstream model files not downloaded; redistribution review pending"
+      },
+      "reproduction": {
+        "setup_script": "scripts/setup-rnnoise-baseline.ps1",
+        "setup_script_sha256": "dd9e08281029a1c264b936ebb85deb0993c6b9e0d6686c7e766d4c18ddc61928",
+        "dockerfile": "containers/rnnoise/Dockerfile",
+        "dockerfile_sha256": "b78cd76cc59436ccfd5ebc23f633a8ff5a51b280798baef82e054578ce3ea37d",
+        "toolchain_manifest": "configs/rnnoise_toolchain.json",
+        "toolchain_manifest_sha256": "dfb718408d3a55fb09b8636aeb17368883dc8e98efc34102e536aff7a50a18c0",
+        "command": "pwsh -File scripts/setup-rnnoise-baseline.ps1 -OutputDir <external-cache>",
+        "pinned_commit": "70f1d256acd4b34a572f999a05c87bf00b67730d",
+        "status": "blocked",
+        "blocker": "RNNoise metrics are not reproduced yet; the hash-bound Docker recipe pins the base image digest, source archive hash, and exact direct toolchain package versions."
       },
       "recipe": "Build xiph/rnnoise at the pinned commit; provide a non-shell CLI wrapper accepting WAV input/output; rerun this script."
     },

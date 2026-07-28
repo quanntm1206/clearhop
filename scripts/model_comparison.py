@@ -29,6 +29,31 @@ except Exception:  # pragma: no cover - exercised on minimal installs
     _scipy_resample_poly = None
 
 
+def canonical_receipt_sha256(payload: dict) -> str:
+    """Hash a receipt canonically while excluding its embedded self-hash."""
+    body = {key: value for key, value in payload.items() if key != "receipt_sha256"}
+    encoded = json.dumps(body, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+    return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
+
+
+def _file_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _git_tracked(root: Path, relative: str) -> bool:
+    try:
+        completed = subprocess.run(
+            ["git", "ls-files", "--error-unmatch", "--", relative],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except OSError:
+        return False
+    return completed.returncode == 0 and relative in completed.stdout.splitlines()
+
+
 METRIC_NAMES = ("snri_db", "si_sdri_db", "stoi", "pesq")
 DEFAULT_NATIVE_RATES = {"DeepFilterNet3": 48000, "RNNoise": 48000, "DTLN": 16000, "WebRTC NS": 16000}
 
@@ -238,6 +263,44 @@ class FrozenHistoricalAdapter(ModelAdapter):
         raise RuntimeError("historical adapter is receipt-only")
 
 
+class ReproducedExternalAdapter(FrozenHistoricalAdapter):
+    """Import a public external-baseline receipt without loading its weights."""
+
+    def __init__(self, receipt_path: Path, *, name: str):
+        self.receipt_path = Path(receipt_path)
+        self.manifest_path = self.receipt_path
+        self.spec = AdapterSpec(name, DEFAULT_NATIVE_RATES.get(name, 16000), runtime="external-receipt")
+
+    def _load(self) -> tuple[dict, list[str]]:
+        payload = json.loads(self.receipt_path.read_text(encoding="utf-8"))
+        if payload.get("receipt_sha256") != canonical_receipt_sha256(payload):
+            raise ValueError("external receipt canonical hash mismatch")
+        row = payload.get("model")
+        if payload.get("schema_version") != 1 or payload.get("status") != "reproduced_local" or not isinstance(row, dict):
+            raise ValueError("external receipt is not a reproduced_local schema-v1 result")
+        if row.get("name") != self.spec.name or row.get("status") != "reproduced_local":
+            raise ValueError("external receipt model identity/status mismatch")
+        ids = row.get("item_ids")
+        if not isinstance(ids, list) or not ids:
+            raise ValueError("external receipt has no item IDs")
+        return payload, [str(item_id) for item_id in ids]
+
+    def summary_result(self, item_ids: list[str]) -> dict:
+        payload, expected_ids = self._load()
+        if expected_ids != item_ids:
+            raise ValueError("manifest item IDs differ from external receipt")
+        row = json.loads(json.dumps(payload["model"], allow_nan=False))
+        receipt_path = self.receipt_path.as_posix()
+        marker = "/reports/public/"
+        if marker in receipt_path:
+            receipt_path = "reports/public/" + receipt_path.split(marker, 1)[1]
+        row["source_receipt"] = {
+            "path": receipt_path,
+            "sha256": payload["receipt_sha256"],
+        }
+        return row
+
+
 def _metric(value: float | None, source: str, reason: str | None = None) -> dict:
     payload = {"available": value is not None, "value": value, "source": source}
     if value is None:
@@ -422,20 +485,24 @@ def _attach_registry_metadata(report: dict, registry: dict) -> dict:
         meta = by_name.get(str(row.get("name")))
         if meta is None:
             continue
-        provenance = dict(meta["provenance"])
-        provenance["weights"] = {
-            "bundled": bool(meta.get("weights_bundled", False)),
-            "weight_sha256": provenance.get("weight_sha256"),
-            "hash_status": "verified" if provenance.get("weight_sha256") else "unavailable",
-        }
-        row["provenance"] = provenance
-        row["environment"] = {
-            "runtime": meta.get("runtime"),
-            "command": meta.get("command"),
-            "recipe": meta.get("recipe"),
-            "python": meta.get("python"),
-        }
+        if row.get("status") != "reproduced_local" or not isinstance(row.get("provenance"), dict):
+            provenance = dict(meta["provenance"])
+            provenance["weights"] = {
+                "bundled": bool(meta.get("weights_bundled", False)),
+                "weight_sha256": provenance.get("weight_sha256"),
+                "hash_status": "verified" if provenance.get("weight_sha256") else "unavailable",
+            }
+            row["provenance"] = provenance
+        if not isinstance(row.get("environment"), dict):
+            row["environment"] = {
+                "runtime": meta.get("runtime"),
+                "command": meta.get("command"),
+                "recipe": meta.get("recipe"),
+                "python": meta.get("python"),
+            }
         row["evidence_class"] = meta.get("evidence_class", row.get("status"))
+        if isinstance(meta.get("reproduction"), dict):
+            row["reproduction"] = dict(meta["reproduction"])
         row.setdefault("spec", {})["license"] = meta["license"]
     return report
 
@@ -471,13 +538,30 @@ def build_default_report(root: Path, *, output: Path | None = None) -> dict:
     # Receipt adapters preserve exact manifest identity without re-running old weights.
     current = FrozenHistoricalAdapter(root / "reports/generated/research_candidate_primary.json", manifest, name="ClearHop")
     historical = FrozenHistoricalAdapter(root / "reports/generated/research_baseline_primary.json", manifest)
-    adapters: list[ModelAdapter] = [current, historical, DeepFilterNet3Adapter(), RNNoiseAdapter(), DTLNAdapter(), WebRTCNSAdapter()]
+    deepfilter_receipt = root / "reports/public/deepfilternet3_reproduction.json"
+    deepfilter: ModelAdapter = ReproducedExternalAdapter(deepfilter_receipt, name="DeepFilterNet3") if deepfilter_receipt.is_file() else DeepFilterNet3Adapter()
+    adapters: list[ModelAdapter] = [current, historical, deepfilter, RNNoiseAdapter(), DTLNAdapter(), WebRTCNSAdapter()]
     # Receipt-only rows need no waveforms; use zero arrays solely to carry IDs.
     items = [BenchmarkItem(item_id, np.zeros(160, dtype=np.float32), np.zeros(160, dtype=np.float32), 16000, str(primary["name"])) for item_id in ids]
     report = run_model_comparison(items, adapters, include_optional_metrics=False)
     _attach_registry_metadata(report, registry)
     report["schema_version"] = 2
     report["protocol"].update({"manifest": str(Path(config["manifest"]).as_posix()), "slice": primary["name"], "slice_offset": primary["offset"], "slice_count": primary["count"]})
+    registry_path = root / "configs/research_baselines.json"
+    manifest_path = root / str(config["manifest"])
+    report["inputs"] = {
+        "registry": {
+            "path": "configs/research_baselines.json",
+            "sha256": _file_sha256(registry_path),
+        },
+        "manifest": {
+            "path": str(Path(config["manifest"]).as_posix()),
+            "sha256": _file_sha256(manifest_path),
+            "item_ids_sha256": hashlib.sha256("\n".join(ids).encode("utf-8")).hexdigest(),
+            "git_tracked": _git_tracked(root, str(Path(config["manifest"]).as_posix())),
+        },
+    }
+    report["receipt_sha256"] = canonical_receipt_sha256(report)
     if output is None:
         output = root / "reports/generated/model_comparison.json"
     output = Path(output)

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import time
+import unittest
 from pathlib import Path
 
 import numpy as np
@@ -14,7 +15,7 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 try:
     from PySide6.QtWidgets import QApplication, QFileDialog
 except ImportError as exc:  # Linux runners may lack Qt's native EGL libraries.
-    pytest.skip(f"Qt runtime unavailable: {exc}", allow_module_level=True)
+    raise unittest.SkipTest(f"Qt runtime unavailable: {exc}") from exc
 
 from desktop.app import MainWindow
 from desktop.pipeline import DenoisePipeline

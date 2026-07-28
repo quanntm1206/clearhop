@@ -1,4 +1,15 @@
 {
+  "embedded_sha256": {
+    "failure_analysis": "f0ece20e6c8ce1e9fca8fe1029c02a363955784b641a55f7597134afe9fe3997",
+    "failure_audio": "3f72ffb86e84c190b21b3cba8d7a34db734af7d0b1904db15124b1f78d164f22",
+    "manifest": "f993b02ac76cb09fc0a427ff50c711882077769cb2e2d8155abc8569b1069c37",
+    "research_evaluations": "68769639ecd03ae37fa4769a727852dc7a38819a4d0840020044d96c2ec8a32e",
+    "research_selection": "4cfe1e81ab9da47ad10a4eab56f075240c6cc7838dee45c6dee3796da69a9c46",
+    "research_training": "1968662f70c878f433141d37572b7a4cdbf162910b401adbdb9182e96470e6f0",
+    "robustness_matrix": "4d4eb45572ca5e69beca3d0a45752824dcd26d11a4f2b343aff3f7a68060528f",
+    "significance": "2e0af028ea3247b3d879dc577a83f38b847f65a2198e2c0f4235beb28e9e853a",
+    "verifier": "15283ee7ad1fda58218750d67bdc64007fb44eba80c0128c2e1932cabcfb6986"
+  },
   "evidence": {
     "failure_analysis": {
       "failure_counts": {
@@ -1269,6 +1280,7 @@
       }
     }
   },
+  "receipt_sha256": "5ea545c85e847502ed669cdc737c1335574c5ae62281ba9781031b64ac5c1b67",
   "receipt_type": "research_readiness",
   "schema_version": 1,
   "source_sha256": {

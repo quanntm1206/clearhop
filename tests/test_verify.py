@@ -815,6 +815,40 @@ class TestVerificationGate(unittest.TestCase):
             self.assertEqual(result["status"], "fail")
             self.assertFalse(result["checks"]["resolved_yaml_binding"])
 
+    def test_gain_calibration_audit_accepts_equivalent_checkpoint_path_spellings(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self._write_gain_calibration_artifacts(root)
+            yaml_path = root / "checkpoints/gain_calibration/full/complex_nmse/seed_17/resolved_config.yaml"
+            yaml_text = yaml_path.read_text(encoding="utf-8")
+            checkpoint_line = next(line for line in yaml_text.splitlines() if line.startswith("checkpoint_dir:"))
+            yaml_path.write_text(
+                yaml_text.replace(checkpoint_line, r'checkpoint_dir: "C:\\Users\\RUNNER~1\\AppData\\Local\\Temp\\equivalent-run"'),
+                encoding="utf-8",
+            )
+            summary_path = yaml_path.with_name("run_summary.json")
+            summary = json.loads(summary_path.read_text(encoding="utf-8"))
+            summary["resolved_yaml_sha256"] = file_sha256(yaml_path)
+            summary_path.write_text(json.dumps(summary), encoding="utf-8")
+            full_path = root / "reports/generated/gain_calibration_full.json"
+            full = json.loads(full_path.read_text(encoding="utf-8"))
+            full["runs"][0]["resolved_yaml"]["sha256"] = file_sha256(yaml_path)
+            full["runs"][0]["run_summary"]["sha256"] = file_sha256(summary_path)
+            full_path.write_text(json.dumps(full), encoding="utf-8")
+
+            scripted = MagicMock()
+            scripted.eval.return_value = scripted
+            with (
+                patch("pathlib.Path.samefile", return_value=True),
+                patch("torch.jit.load", return_value=scripted),
+                patch("onnxruntime.InferenceSession"),
+                patch("scripts.verify.export_parity_audit", return_value={"status": "pass", "steps": 20}),
+            ):
+                result = gain_calibration_audit(root)
+
+            self.assertEqual(result["status"], "pass", result)
+            self.assertTrue(result["checks"]["resolved_yaml_binding"])
+
     def test_gain_calibration_audit_recomputes_recorded_acceptance(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

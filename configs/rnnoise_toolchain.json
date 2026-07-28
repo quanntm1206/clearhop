@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-07-28",
+  "platform": "linux/amd64",
+  "base_image": "ubuntu@sha256:4fbb8e6a8395de5a7550b33509421a2bafbc0aab6c06ba2cef9ebffbc7092d90",
+  "apt_snapshot": "https://snapshot.ubuntu.com/ubuntu/20260728T000000Z/",
+  "apt_snapshot_timestamp": "20260728T000000Z",
+  "source_commit": "70f1d256acd4b34a572f999a05c87bf00b67730d",
+  "source_archive_url": "https://github.com/xiph/rnnoise/archive/70f1d256acd4b34a572f999a05c87bf00b67730d.tar.gz",
+  "source_archive_sha256": "f61ee0b3f4c4cd337303e003d333357c5eaf25ef5d75a742109ee59e9a0a3932",
+  "model_archive_url": "https://media.xiph.org/rnnoise/models/rnnoise_data-0a8755f8e2d834eff6a54714ecc7d75f9932e845df35f8b59bc52a7cfe6e8b37.tar.gz",
+  "model_archive_sha256": "0a8755f8e2d834eff6a54714ecc7d75f9932e845df35f8b59bc52a7cfe6e8b37",
+  "packages": {
+    "autoconf": "2.71-3",
+    "automake": "1:1.16.5-1.3ubuntu1",
+    "build-essential": "12.10ubuntu1",
+    "ca-certificates": "20260601~24.04.1",
+    "curl": "8.5.0-2ubuntu10.11",
+    "libtool": "2.4.7-7build1",
+    "pkg-config": "1.8.1-2build1"
+  }
+}

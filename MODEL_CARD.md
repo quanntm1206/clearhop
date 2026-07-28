@@ -18,12 +18,23 @@ Reproduced results and hardware-bound latency appear only in `reports/public/`. 
 
 The machine-readable comparison receipt is schema v2 and binds each baseline to
 `configs/research_baselines.json` (source URL, pinned commit/version, native
-sample rate, license, weight hash status, command/recipe, and environment).
-DeepFilterNet3, RNNoise, DTLN, and WebRTC NS are currently `blocked`: this
-Windows environment has no configured third-party runtime or redistribution-
-reviewed weights. No external metric is claimed. A baseline may be promoted
-only after rerunning the same item IDs with a pinned executable, dependency
-lock, model SHA-256, and captured latency receipt.
+sample rate, license, weight hash status, command/recipe, and environment). It
+also binds the registry file SHA-256, tracked manifest path/SHA-256, ordered
+item-ID fingerprint, and its own canonical hash. The research-readiness receipt
+has a canonical self-hash plus hashes for every embedded evidence object.
+DeepFilterNet3 is `reproduced_local` on all 500 frozen comparison IDs. Its
+locally measured SI-SDRi/SNRi/STOI/PESQ are `6.390235 dB`, `4.362339 dB`,
+`0.856658`, and `2.018783`; exact provenance, 16→48→16 kHz conversion,
+environment, latency, memory, and canonical hash are bound in
+`reports/public/deepfilternet3_reproduction.json`. Third-party weights are not
+redistributed.
+
+RNNoise remains numerically `blocked`; its base-image digest, source archive
+SHA-256, exact direct package versions, Dockerfile/toolchain/setup hashes are
+verified, not its enhancement metrics. DTLN and WebRTC NS remain
+`blocked`. Audited external coverage is tier `one_plus_recipe`, which caps
+research publish readiness at `9.0/10`. A blocked baseline may be promoted only
+after rerunning the same IDs with pinned dependencies and model hashes.
 
 ## Limitations
 

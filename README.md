@@ -6,6 +6,8 @@ ClearHop is a Windows-first desktop and Python pipeline for local-only WAV enhan
 
 ## Install on Windows
 
+Prerequisites: Windows, PowerShell 7, and Python 3.11. The release dependency lock is verified for Python 3.11 only.
+
 After cloning, run one command:
 
 ```powershell
@@ -46,23 +48,32 @@ These results are local measurements, not external marketing claims.
 
 ## Research evidence
 
-The five-seed protocol, manifests, selection checks, and robustness evidence are bound in [`reports/public/research_readiness.json`](reports/public/research_readiness.json). The model comparison schema and per-adapter status are in [`reports/public/model_comparison.json`](reports/public/model_comparison.json).
+The five-seed protocol, manifests, selection checks, and robustness evidence are bound in [`reports/public/research_readiness.json`](reports/public/research_readiness.json). Its canonical self-hash and per-evidence hashes reject embedded numeric drift. The model comparison schema and per-adapter status are in [`reports/public/model_comparison.json`](reports/public/model_comparison.json), which binds the exact baseline registry and tracked manifest path, file SHA-256, and item-ID fingerprint.
 
 Against the frozen historical baseline: SNR delta `+8.0161 dB`, 95% CI `[7.6781, 8.3618]`; STOI delta `+0.01064`, 95% CI `[0.00927, 0.01202]`; SI-SDR delta `+0.02756 dB`, 95% CI `[-0.04418, 0.09995]`, not statistically significant.
 
-DeepFilterNet3, RNNoise, DTLN, and WebRTC NS results remain `blocked` unless reproduced with exact source, weights, license, sample-rate conversion, command, and hardware metadata. Published numbers never substitute for local measurements. See [`docs/research-comparison.md`](docs/research-comparison.md) and [`MODEL_CARD.md`](MODEL_CARD.md).
+DeepFilterNet3 is now `reproduced_local` on the same frozen 500-item slice: SI-SDRi `6.390235 dB`, SNRi `4.362339 dB`, STOI `0.856658`, PESQ `2.018783`. Its pinned source, archive/checkpoint hashes, explicit 16→48→16 kHz conversion, timings, environment, and canonical receipt hash are in [`reports/public/deepfilternet3_reproduction.json`](reports/public/deepfilternet3_reproduction.json).
+
+External coverage is tier `one_plus_recipe`: one reproduced external model plus one verified pinned blocker recipe. RNNoise remains numerically `blocked`; its recipe pins the Linux/amd64 base-image digest, Ubuntu archive snapshot, source/model archive SHA-256 values, exact direct toolchain package versions, Dockerfile, manifest, and setup-script hashes. The rebuilt artifact receipt is [`reports/public/rnnoise_build.json`](reports/public/rnnoise_build.json). DTLN and WebRTC NS remain `blocked`. This tier caps research publish readiness at `9.0/10`, not `10/10`. Published upstream numbers never substitute for local measurements. See [`docs/research-comparison.md`](docs/research-comparison.md) and [`MODEL_CARD.md`](MODEL_CARD.md).
 
 ## Verify and develop
 
 ```powershell
 python -m pip install -e ".[desktop,dev,metrics,export]"
 python -m pytest -q
-python scripts/verify.py --production-readiness
-python scripts/verify.py --research-readiness
+python scripts/verify_public_production.py
+python scripts/verify_public_research.py
 python scripts/verify.py --publish-readiness
 ```
 
-CI runs Linux tests plus a Windows offscreen open/process/save smoke. Tagged releases additionally gate on all verifiers, a clean wheel install, asset hashes, PyInstaller `onedir` launch outside the repository, ZIP inventory, and checksum creation.
+Full artifact holders can additionally re-audit the ignored training outputs:
+
+```powershell
+python scripts/verify.py --production-readiness
+python scripts/verify.py --research-readiness
+```
+
+CI runs Linux tests plus a Windows offscreen open/process/save smoke. Tagged releases use a CPU-only build environment, immutable tag/version/hash gates, a clean wheel entrypoint smoke, and real PyInstaller `onedir` denoising outside the repository before checksum creation.
 
 ## Project policy
 

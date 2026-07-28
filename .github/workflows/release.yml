@@ -4,34 +4,63 @@ on:
   push:
     tags: ["v*.*.*"]
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing release tag (must equal project version)"
+        required: true
+        type: string
 
 permissions:
   contents: read
 
 jobs:
-  verify-build-publish:
+  verify-build:
     runs-on: windows-latest
-    permissions:
-      contents: write
+    outputs:
+      verified_commit: ${{ steps.release-ref.outputs.commit }}
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+      PIP_CONSTRAINT: ${{ github.workspace }}/constraints/release.txt
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          python-version: "3.11"
-      - name: Install package and build dependencies
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'workflow_dispatch' && format('refs/tags/{0}', inputs.tag) || github.ref }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11.15"
+      - name: Bind checkout to immutable release tag
+        id: release-ref
         shell: pwsh
-        run: python -m pip install -e ".[desktop,dev,export]" pyinstaller
+        run: |
+          python scripts/validate_release.py --tag $env:RELEASE_TAG --output reports/generated/release_validation.json
+          if ($LASTEXITCODE -ne 0) { throw "Release metadata or asset hash validation failed." }
+          $tagCommit = (git rev-parse --verify "refs/tags/$env:RELEASE_TAG^{commit}").Trim()
+          if ($LASTEXITCODE -ne 0) { throw "Release tag does not exist." }
+          $headCommit = (git rev-parse HEAD).Trim()
+          if ($tagCommit -ne $headCommit) { throw "Checkout HEAD does not match release tag." }
+          "commit=$tagCommit" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+      - name: Install CPU-only package and build dependencies
+        shell: pwsh
+        run: |
+          python -m pip install "pip==26.1.2" "setuptools==83.0.0"
+          if ($LASTEXITCODE -ne 0) { throw "Pinned packaging bootstrap failed." }
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu "torch==2.13.0+cpu"
+          if ($LASTEXITCODE -ne 0) { throw "CPU-only PyTorch installation failed." }
+          python -m pip install -c constraints/release.txt -e ".[desktop,dev,export,package]"
+          if ($LASTEXITCODE -ne 0) { throw "Project dependency installation failed." }
+          python -c "import torch; assert torch.version.cuda is None, 'Release runtime must be CPU-only'"
       - name: Full test suite
         shell: pwsh
         env:
           QT_QPA_PLATFORM: offscreen
         run: python -m pytest -q
-      - name: Production verifier
+      - name: Public production evidence gate
         shell: pwsh
-        run: python scripts/verify.py --production-readiness
-      - name: Research verifier
+        run: python scripts/verify_public_production.py
+      - name: Public research evidence gate
         shell: pwsh
-        run: python scripts/verify.py --research-readiness
+        run: python scripts/verify_public_research.py
       - name: Publish-readiness verifier
         shell: pwsh
         run: python scripts/verify.py --publish-readiness
@@ -39,30 +68,104 @@ jobs:
         shell: pwsh
         run: |
           python -m build --wheel
-          $target = Join-Path $env:RUNNER_TEMP "clearhop-wheel"
-          python -m venv $target
-          & (Join-Path $target "Scripts/python.exe") -m pip install (Get-ChildItem dist\*.whl | Select-Object -First 1).FullName
-          if ($LASTEXITCODE -ne 0) { throw "Wheel install failed" }
+          if ($LASTEXITCODE -ne 0) { throw "Wheel build failed." }
+          $installRoot = Join-Path $env:RUNNER_TEMP "clearhop-wheel-install"
+          $venv = Join-Path $installRoot "venv"
+          $smokeRoot = Join-Path $installRoot "smoke-cwd"
+          $assetDir = Join-Path $installRoot "assets"
+          New-Item -ItemType Directory -Force $smokeRoot, $assetDir | Out-Null
+          python -m venv $venv
+          if ($LASTEXITCODE -ne 0) { throw "Isolated wheel environment creation failed." }
+          $wheelPython = Join-Path $venv "Scripts/python.exe"
+          $wheelEntrypoint = Join-Path $venv "Scripts/noise-reduce-desktop.exe"
+          & $wheelPython -m pip install "pip==26.1.2" "setuptools==83.0.0"
+          if ($LASTEXITCODE -ne 0) { throw "Isolated pinned packaging bootstrap failed." }
+          & $wheelPython -m pip install --index-url https://download.pytorch.org/whl/cpu "torch==2.13.0+cpu"
+          if ($LASTEXITCODE -ne 0) { throw "Isolated CPU PyTorch installation failed." }
+          $wheelPath = (Get-ChildItem dist\*.whl | Select-Object -First 1).FullName
+          & $wheelPython -m pip install -c constraints\release.txt "$($wheelPath)[desktop]"
+          if ($LASTEXITCODE -ne 0) { throw "Wheel dependency installation failed." }
+          & $wheelPython -c "import torch; assert torch.version.cuda is None, 'Wheel smoke must be CPU-only'"
+          Copy-Item artifacts\cpu_bundle\checkpoint.pth (Join-Path $assetDir "checkpoint.pth")
+          $inputWav = Join-Path $smokeRoot "input.wav"
+          $outputWav = Join-Path $smokeRoot "output.wav"
+          $receiptPath = Join-Path $smokeRoot "receipt.json"
+          & $wheelPython -c "import numpy as np, soundfile as sf; sr=16000; x=(0.1*np.sin(2*np.pi*440*np.arange(sr)/sr)).astype('float32'); sf.write(r'$inputWav', x, sr)"
+          if ($LASTEXITCODE -ne 0) { throw "Wheel smoke fixture generation failed." }
+          $env:NOISE_REDUCE_CHECKPOINT = $null
+          Push-Location $smokeRoot
+          try {
+            & $wheelEntrypoint --smoke-input $inputWav --smoke-output $outputWav --smoke-receipt $receiptPath
+            if ($LASTEXITCODE -ne 0) { throw "Installed wheel denoise failed." }
+          } finally {
+            Pop-Location
+          }
+          $receipt = Get-Content $receiptPath -Raw | ConvertFrom-Json
+          $checkpointSha = (Get-FileHash artifacts\cpu_bundle\checkpoint.pth -Algorithm SHA256).Hash.ToLowerInvariant()
+          $outputSha = (Get-FileHash $outputWav -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($receipt.status -ne "pass" -or $receipt.checkpoint_sha256 -ne $checkpointSha -or $receipt.output_sha256 -ne $outputSha) {
+            throw "Installed wheel receipt is not output/model hash-bound."
+          }
       - name: Build PyInstaller onedir
         shell: pwsh
         run: .\scripts\build-desktop.ps1 -Clean -OutputDir dist\desktop
-      - name: Packaged launch outside repository
+      - name: Real packaged denoise outside repository
         shell: pwsh
         env:
           QT_QPA_PLATFORM: offscreen
-        run: .\scripts\smoke-packaged-desktop.ps1 -Executable dist\desktop\ClearHop\ClearHop.exe -WorkingDirectory $env:RUNNER_TEMP
+        run: |
+          $manifest = Get-Content configs\desktop_assets.json -Raw | ConvertFrom-Json
+          $checkpointSha = ($manifest.assets | Where-Object name -eq "checkpoint.pth").sha256
+          .\scripts\smoke-packaged-desktop.ps1 -Executable dist\desktop\ClearHop\ClearHop.exe -WorkingDirectory $env:RUNNER_TEMP -ExpectedCheckpointSha256 $checkpointSha
       - name: Release inventory and checksums
         shell: pwsh
         run: |
-          Compress-Archive -Path dist\desktop\ClearHop -DestinationPath ClearHop-windows-x64.zip -Force
-          (Get-FileHash ClearHop-windows-x64.zip -Algorithm SHA256).Hash.ToLowerInvariant() | Out-File ClearHop-windows-x64.zip.sha256 -Encoding ascii
-          if ((Get-Item ClearHop-windows-x64.zip).Length -gt 500MB) { throw "Release archive exceeds 500 MB" }
-      - name: Publish release assets
-        uses: softprops/action-gh-release@v2
+          $uncompressedBytes = (Get-ChildItem dist\desktop\ClearHop -Recurse -File | Measure-Object Length -Sum).Sum
+          if ($uncompressedBytes -gt 1GB) { throw "Release runtime exceeds 1 GB; CPU-only packaging regressed." }
+          New-Item -ItemType Directory -Path release-assets -Force | Out-Null
+          Compress-Archive -Path dist\desktop\ClearHop -DestinationPath release-assets\ClearHop-windows-x64.zip -Force
+          $archive = Get-Item release-assets\ClearHop-windows-x64.zip
+          if ($archive.Length -gt 500MB) { throw "Release archive exceeds 500 MB." }
+          $hash = (Get-FileHash $archive.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash *ClearHop-windows-x64.zip" | Out-File release-assets\ClearHop-windows-x64.zip.sha256 -Encoding ascii
+          Copy-Item artifacts\cpu_bundle\checkpoint.pth, artifacts\cpu_bundle\model.onnx release-assets\
+          python scripts/validate_release.py --tag $env:RELEASE_TAG
+          if ($LASTEXITCODE -ne 0) { throw "Final release asset validation failed." }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
+          name: clearhop-release-assets
+          path: release-assets/*
+          if-no-files-found: error
+          retention-days: 3
+
+  publish:
+    needs: verify-build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: refs/tags/${{ env.RELEASE_TAG }}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: clearhop-release-assets
+          path: release-assets
+      - name: Re-check release tag target before publish
+        shell: bash
+        env:
+          VERIFIED_COMMIT: ${{ needs.verify-build.outputs.verified_commit }}
+        run: |
+          git fetch --force origin "refs/tags/${RELEASE_TAG}:refs/tags/${RELEASE_TAG}"
+          tag_commit=$(git rev-parse --verify "refs/tags/${RELEASE_TAG}^{commit}")
+          test "$tag_commit" = "$VERIFIED_COMMIT"
+      - name: Publish immutable release assets
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
           fail_on_unmatched_files: true
-          files: |
-            ClearHop-windows-x64.zip
-            ClearHop-windows-x64.zip.sha256
-            artifacts/cpu_bundle/checkpoint.pth
-            artifacts/cpu_bundle/model.onnx
+          files: release-assets/*

@@ -3,34 +3,50 @@ param(
     [switch]$Launch,
     [switch]$Offline,
     [switch]$DryRun,
-    [string]$InstallDir = (Join-Path $env:LOCALAPPDATA "NoiseReduce")
+    [switch]$NoShortcuts,
+    [string]$InstallDir = (Join-Path $env:LOCALAPPDATA "ClearHop")
 )
 
 $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path -Parent $PSScriptRoot
 $ManifestPath = Join-Path $RepoRoot "configs\desktop_assets.json"
+$ConstraintPath = Join-Path $RepoRoot "constraints\release.txt"
 
 function Invoke-Step {
     param([string]$Description, [scriptblock]$Action)
-    Write-Host "[noise-reduce] $Description"
+    Write-Host "[clearhop] $Description"
     if (-not $DryRun) { & $Action }
 }
 
-if (-not $IsWindows) { throw "Noise Reduce desktop installer currently supports Windows only." }
+if (-not $IsWindows) { throw "ClearHop desktop installer currently supports Windows only." }
 if (-not (Test-Path -LiteralPath $ManifestPath)) { throw "Asset manifest not found: $ManifestPath" }
+if (-not (Test-Path -LiteralPath $ConstraintPath)) { throw "Release constraints not found: $ConstraintPath" }
+$ConstraintUri = ([Uri](Resolve-Path -LiteralPath $ConstraintPath).Path).AbsoluteUri
 
 $Python = $null
-foreach ($Candidate in @("py", "python")) {
-    if (Get-Command $Candidate -ErrorAction SilentlyContinue) { $Python = $Candidate; break }
-}
-if (-not $Python) { throw "Python 3.10 or newer is required." }
-
-if (-not $DryRun) {
-    $VersionText = if ($Python -eq "py") { & py -3 -c "import sys; print('.'.join(map(str, sys.version_info[:3])))" } else { & python -c "import sys; print('.'.join(map(str, sys.version_info[:3])))" }
-    $Parts = $VersionText.Trim().Split(".")
-    if ([int]$Parts[0] -lt 3 -or ([int]$Parts[0] -eq 3 -and [int]$Parts[1] -lt 10)) {
-        throw "Python 3.10 or newer is required; found $VersionText."
+$PythonPrefix = @()
+if (Get-Command "py" -ErrorAction SilentlyContinue) {
+    if ($DryRun) {
+        $Python = "py"
+        $PythonPrefix = @("-3.11")
+    } else {
+        & py -3.11 -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3, 11) else 1)" 2>$null
+        if ($LASTEXITCODE -eq 0) {
+            $Python = "py"
+            $PythonPrefix = @("-3.11")
+        }
     }
+}
+if (-not $Python -and (Get-Command "python" -ErrorAction SilentlyContinue)) {
+    if ($DryRun) {
+        $Python = "python"
+    } else {
+        & python -c "import sys; raise SystemExit(0 if sys.version_info[:2] == (3, 11) else 1)"
+        if ($LASTEXITCODE -eq 0) { $Python = "python" }
+    }
+}
+if (-not $Python) {
+    throw "Python 3.11 is required by the verified desktop dependency lock. Install Python 3.11, then rerun this command."
 }
 
 $Venv = Join-Path $InstallDir "venv"
@@ -51,11 +67,20 @@ if (-not $Offline) {
 
 Invoke-Step "Create isolated environment at $Venv" {
     New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
-    if ($Python -eq "py") { & py -3 -m venv $Venv } else { & python -m venv $Venv }
+    & $Python @PythonPrefix -m venv $Venv
 }
 Invoke-Step "Install desktop package" {
-    & $VenvPython -m pip install --upgrade pip
-    & $VenvPython -m pip install "$RepoRoot[desktop]"
+    # Absolute inheritance also constrains PEP 517 build-isolation subprocesses.
+    # The file URI keeps paths containing spaces as one pip option value.
+    $env:PIP_CONSTRAINT = $ConstraintUri
+    & $VenvPython -m pip install "pip==26.1.2" "setuptools==83.0.0"
+    if ($LASTEXITCODE -ne 0) { throw "Pinned packaging bootstrap failed." }
+    & $VenvPython -m pip install --index-url https://download.pytorch.org/whl/cpu "torch==2.13.0+cpu"
+    if ($LASTEXITCODE -ne 0) { throw "CPU-only PyTorch installation failed." }
+    & $VenvPython -c "import torch; assert torch.version.cuda is None"
+    if ($LASTEXITCODE -ne 0) { throw "Installed PyTorch runtime is not CPU-only." }
+    & $VenvPython -m pip install -c $ConstraintPath "$RepoRoot[desktop]"
+    if ($LASTEXITCODE -ne 0) { throw "ClearHop desktop package installation failed." }
 }
 Invoke-Step "Prepare verified model assets" {
     New-Item -ItemType Directory -Force -Path $AssetDir | Out-Null
@@ -86,22 +111,24 @@ Invoke-Step "Prepare verified model assets" {
 }
 
 $ShortcutTarget = Join-Path $Venv "Scripts\noise-reduce-desktop.exe"
-Invoke-Step "Create Start Menu and Desktop shortcuts" {
-    $Shell = New-Object -ComObject WScript.Shell
-    $ShortcutLocations = @(
-        (Join-Path ([Environment]::GetFolderPath("Desktop")) "Noise Reduce.lnk"),
-        (Join-Path ([Environment]::GetFolderPath("Programs")) "Noise Reduce.lnk")
-    )
-    foreach ($Location in $ShortcutLocations) {
-        $Shortcut = $Shell.CreateShortcut($Location)
-        $Shortcut.TargetPath = $ShortcutTarget
-        $Shortcut.WorkingDirectory = $InstallDir
-        $Shortcut.Description = "Local speech noise reduction"
-        $Shortcut.Save()
+if (-not $NoShortcuts) {
+    Invoke-Step "Create Start Menu and Desktop shortcuts" {
+        $Shell = New-Object -ComObject WScript.Shell
+        $ShortcutLocations = @(
+            (Join-Path ([Environment]::GetFolderPath("Desktop")) "ClearHop.lnk"),
+            (Join-Path ([Environment]::GetFolderPath("Programs")) "ClearHop.lnk")
+        )
+        foreach ($Location in $ShortcutLocations) {
+            $Shortcut = $Shell.CreateShortcut($Location)
+            $Shortcut.TargetPath = $ShortcutTarget
+            $Shortcut.WorkingDirectory = $InstallDir
+            $Shortcut.Description = "ClearHop local speech denoising"
+            $Shortcut.Save()
+        }
     }
 }
 
 if ($Launch) {
-    Invoke-Step "Launch Noise Reduce" { Start-Process -FilePath $ShortcutTarget -WorkingDirectory $InstallDir }
+    Invoke-Step "Launch ClearHop" { Start-Process -FilePath $ShortcutTarget -WorkingDirectory $InstallDir }
 }
-Write-Host "[noise-reduce] Installation complete."
+Write-Host "[clearhop] Installation complete."

@@ -535,8 +535,9 @@ def gain_calibration_artifact_audit(root: Path) -> dict[str, object]:
                     and int(parsed_yaml.get("max_steps", -1)) == 30000
                     and int(parsed_yaml.get("scheduler_total_steps", -1)) == 30000
                     and same_path(parsed_yaml.get("checkpoint_dir"), expected_run_dir)
+                    and same_path(resolved.get("checkpoint_dir"), expected_run_dir)
                     and all(parsed_yaml.get(key) == _EXPECTED_LOSS_CONFIGS.get(str(selected_arm), {}).get(key) for key in _LOSS_KEYS)
-                    and all(resolved.get(key) == parsed_yaml.get(key) for key in (*_LOSS_KEYS, "seed", "experiment_id", "max_steps", "scheduler_total_steps", "checkpoint_dir"))
+                    and all(resolved.get(key) == parsed_yaml.get(key) for key in (*_LOSS_KEYS, "seed", "experiment_id", "max_steps", "scheduler_total_steps"))
                 )
             except Exception as exc:
                 yaml_binding_ok = False
@@ -1119,19 +1120,33 @@ def publish_readiness(root: Path) -> dict[str, object]:
     generated/private reports must never be linked from the public README.
     """
     root = Path(root).resolve()
+    if __package__:
+        from .verify_public_production import verify_public_production
+        from .verify_public_research import audit_public_research
+    else:
+        from verify_public_production import verify_public_production
+        from verify_public_research import audit_public_research
+
+    public_production = verify_public_production(root)
+    public_research = audit_public_research(root)
     required_docs = (
         "README.md", "LICENSE", "CITATION.cff", "SECURITY.md", "CONTRIBUTING.md",
         "CHANGELOG.md", "MODEL_CARD.md", "docs/research-comparison.md",
     )
     required_receipts = (
+        "reports/public/deepfilternet3_reproduction.json",
         "reports/public/model_comparison.json",
         "reports/public/production_readiness_verify.json",
         "reports/public/research_readiness.json",
+        "reports/public/rnnoise_build.json",
     )
     checks: dict[str, bool] = {}
     readme = root / "README.md"
     readme_text = readme.read_text(encoding="utf-8", errors="replace") if readme.is_file() else ""
-    checks["required_documents"] = all((root / path).is_file() for path in required_docs)
+    checks["required_documents"] = all(
+        (root / path).is_file() and bool((root / path).read_text(encoding="utf-8", errors="replace").strip())
+        for path in required_docs
+    )
     checks["public_receipts"] = all((root / path).is_file() for path in required_receipts)
     receipt_hygiene_errors: list[str] = []
     absolute_path = re.compile(r"^[A-Za-z]:[\\/]|^[/\\]{2}")
@@ -1160,7 +1175,7 @@ def publish_readiness(root: Path) -> dict[str, object]:
     )
     placeholder_tokens = ("example.com", "your-org", "your-username", "owner/repository", "TODO", "TBD", "<owner>")
     public_text = readme_text
-    for relative in ("CITATION.cff", "pyproject.toml", "configs/desktop_assets.json", ".github/workflows/ci.yml", ".github/workflows/release.yml"):
+    for relative in (*required_docs[1:], "pyproject.toml", "configs/desktop_assets.json", ".github/workflows/ci.yml", ".github/workflows/release.yml"):
         candidate = root / relative
         if candidate.is_file():
             public_text += "\n" + candidate.read_text(encoding="utf-8", errors="replace")
@@ -1201,6 +1216,20 @@ def publish_readiness(root: Path) -> dict[str, object]:
             if path.suffix.lower() in {".pem", ".key", ".p12", ".env"}:
                 inventory_errors.append(rel)
     checks["inventory"] = not inventory_errors
+    tracked_exclusions: list[str] = []
+    if (root / ".git").exists():
+        tracked = subprocess.run(
+            ["git", "ls-files", "--", "raw_data.zip", "raw_data", "data", "checkpoints", "reports/generated"],
+            cwd=root,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if tracked.returncode != 0:
+            tracked_exclusions.append("git ls-files audit failed")
+        else:
+            tracked_exclusions.extend(line for line in tracked.stdout.splitlines() if line.strip())
+    checks["excluded_payloads_untracked"] = not tracked_exclusions
     public_comparison: dict[str, object] = {}
     comparison_path = root / "reports/public/model_comparison.json"
     if comparison_path.is_file():
@@ -1228,21 +1257,44 @@ def publish_readiness(root: Path) -> dict[str, object]:
         "external_blocked": sum(str(row.get("status", "")).lower() == "blocked" for row in external_rows),
         "comparison_status": public_comparison.get("status") if isinstance(public_comparison, dict) else None,
     }
-    checks["production_receipt"] = (root / required_receipts[1]).is_file()
-    checks["research_receipt"] = (root / required_receipts[2]).is_file()
-    github_checks = ("required_documents", "public_receipts", "public_receipt_hygiene", "readme_public_evidence", "no_placeholders", "version_consistency", "workflow_surface", "inventory")
+    audited_coverage = public_research.get("coverage") if isinstance(public_research, dict) else None
+    if not isinstance(audited_coverage, dict):
+        audited_coverage = {}
+    verified_recipes_value = audited_coverage.get("verified_blocker_recipes", 0)
+    verified_recipes = verified_recipes_value if isinstance(verified_recipes_value, int) and not isinstance(verified_recipes_value, bool) and verified_recipes_value >= 0 else 0
+    if research_coverage["external_reproduced"] >= 2:
+        coverage_tier = "two_reproduced"
+    elif research_coverage["external_reproduced"] == 1 and verified_recipes >= 1:
+        coverage_tier = "one_plus_recipe"
+    else:
+        coverage_tier = "insufficient"
+    research_coverage.update({
+        "verified_blocker_recipes": verified_recipes,
+        "eligible": coverage_tier != "insufficient",
+        "tier": coverage_tier,
+    })
+    checks["production_receipt"] = public_production.get("status") == "pass"
+    checks["research_receipt"] = public_research.get("status") == "pass"
+    github_checks = ("required_documents", "public_receipts", "public_receipt_hygiene", "readme_public_evidence", "no_placeholders", "version_consistency", "workflow_surface", "inventory", "excluded_payloads_untracked")
     production_checks = ("package_metadata", "workflow_surface", "production_receipt", "public_receipts", "version_consistency")
     research_checks = ("research_status_separated", "research_receipt_schema", "research_receipt", "public_receipts", "no_placeholders")
     scores = {name: round(10.0 * sum(checks.get(key, False) for key in group) / len(group), 2) for name, group in (("github", github_checks), ("production", production_checks), ("research", research_checks))}
+    research_caps = {"two_reproduced": 10.0, "one_plus_recipe": 9.0, "insufficient": 8.0}
+    scores["research"] = min(scores["research"], research_caps.get(str(research_coverage["tier"]), 8.0))
     status = "pass" if all(score >= 9.0 for score in scores.values()) else "fail"
     return {
         "schema_version": 1,
         "status": status,
         "scores": scores,
-        "score_scope": "repository and evidence readiness; external baseline coverage is reported separately",
+        "score_scope": "repository and evidence readiness; research score is capped by verified external-baseline coverage",
         "research_coverage": research_coverage,
+        "public_evidence": {
+            "production": public_production,
+            "research": public_research,
+        },
         "checks": checks,
         "inventory_errors": inventory_errors,
+        "tracked_exclusion_errors": tracked_exclusions,
         "receipt_hygiene_errors": receipt_hygiene_errors,
     }
 
