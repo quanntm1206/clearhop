@@ -45,6 +45,17 @@ def test_publish_readiness_rejects_placeholder_and_large_inventory(tmp_path: Pat
     assert result["checks"]["inventory"] is False
 
 
+def test_publish_readiness_rejects_truncated_apache_license(tmp_path: Path) -> None:
+    (tmp_path / "LICENSE").write_text(
+        "Apache License\nVersion 2.0, January 2004\nAS IS BASIS\n",
+        encoding="utf-8",
+    )
+
+    result = publish_readiness(tmp_path)
+
+    assert result["checks"]["license_spdx"] is False
+
+
 def test_publish_readiness_requires_version_consistency(tmp_path: Path) -> None:
     (tmp_path / "pyproject.toml").write_text('[project]\nversion = "1.0.0"\n', encoding="utf-8")
     (tmp_path / "CITATION.cff").write_text('version: "0.1.0"\n', encoding="utf-8")
