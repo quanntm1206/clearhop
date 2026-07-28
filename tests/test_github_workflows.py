@@ -4,6 +4,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_desktop_build_copies_and_verifies_project_license() -> None:
+    text = (ROOT / "scripts/build-desktop.ps1").read_text(encoding="utf-8")
+    for token in (
+        'Join-Path $ReleaseRoot "LICENSE"',
+        "Copy-Item -LiteralPath $LicenseSource",
+        "Get-FileHash -LiteralPath $LicenseSource",
+        "Get-FileHash -LiteralPath $LicenseTarget",
+        "Packaged license hash mismatch",
+    ):
+        assert token in text
+
+
 def test_ci_installs_desktop_and_runs_fail_closed_gates() -> None:
     text = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
     for token in (
@@ -11,6 +23,19 @@ def test_ci_installs_desktop_and_runs_fail_closed_gates() -> None:
         "verify_public_production.py", "verify_public_research.py", "--publish-readiness",
     ):
         assert token in text
+
+
+def test_ci_avoids_duplicate_feature_branch_runs() -> None:
+    text = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+    assert "push:\n    branches: [main]" in text
+    assert "pull_request:" in text
+
+
+def test_rnnoise_rebuild_runs_only_after_merge_to_main() -> None:
+    text = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+    step = text[text.index("Rebuild and verify pinned RNNoise recipe") :]
+    assert "if: github.event_name == 'push' && github.ref == 'refs/heads/main'" in step
+    assert "python scripts/verify_rnnoise_build.py --rebuild" in step
 
 
 def test_ci_runs_clean_offline_installer_and_real_denoise_outside_repo() -> None:

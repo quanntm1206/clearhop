@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clearhop"
-version = "0.1.0"
+version = "0.1.1"
 description = "Local causal speech denoising for reproducible research and real-time deployment"
 readme = "README.md"
 license = {file = "LICENSE"}

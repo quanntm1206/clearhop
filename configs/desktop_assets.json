@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "release_version": "0.1.0",
+  "release_version": "0.1.1",
   "model_schema": {
     "sample_rate_hz": 16000,
     "channels": 1,
@@ -10,13 +10,13 @@
   "assets": [
     {
       "name": "checkpoint.pth",
-      "url": "https://github.com/quanntm1206/clearhop/releases/download/v0.1.0/checkpoint.pth",
+      "url": "https://github.com/quanntm1206/clearhop/releases/download/v0.1.1/checkpoint.pth",
       "sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
       "offline_path": "artifacts/cpu_bundle/checkpoint.pth"
     },
     {
       "name": "model.onnx",
-      "url": "https://github.com/quanntm1206/clearhop/releases/download/v0.1.0/model.onnx",
+      "url": "https://github.com/quanntm1206/clearhop/releases/download/v0.1.1/model.onnx",
       "sha256": "806fb5f6bf23c4e74c781bea5544e63bc5307902f0ec7f4dbd667640853c441b",
       "offline_path": "artifacts/cpu_bundle/model.onnx"
     }
