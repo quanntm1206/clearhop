@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -43,6 +44,51 @@ def test_publish_readiness_rejects_placeholder_and_large_inventory(tmp_path: Pat
     result = publish_readiness(tmp_path)
     assert result["checks"]["no_placeholders"] is False
     assert result["checks"]["inventory"] is False
+
+
+def test_publish_readiness_rejects_truncated_apache_license(tmp_path: Path) -> None:
+    (tmp_path / "LICENSE").write_text(
+        "Apache License\nVersion 2.0, January 2004\nAS IS BASIS\n",
+        encoding="utf-8",
+    )
+
+    result = publish_readiness(tmp_path)
+
+    assert result["checks"]["license_spdx"] is False
+
+
+def test_license_failure_is_a_hard_gate_without_masking_document_presence(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.setattr(
+        "scripts.verify_public_production.verify_public_production",
+        lambda root: {"status": "pass", "checks": {}},
+    )
+    monkeypatch.setattr(
+        "scripts.verify_public_research.audit_public_research",
+        lambda root: {"status": "pass", "checks": {}, "coverage": {"verified_blocker_recipes": 1}},
+    )
+    files = (
+        "README.md", "LICENSE", "CITATION.cff", "SECURITY.md", "CONTRIBUTING.md",
+        "CHANGELOG.md", "MODEL_CARD.md", "docs/research-comparison.md", "pyproject.toml",
+        "configs/desktop_assets.json", ".github/workflows/ci.yml", ".github/workflows/release.yml",
+        "reports/public/deepfilternet3_reproduction.json", "reports/public/model_comparison.json",
+        "reports/public/production_readiness_verify.json", "reports/public/research_readiness.json",
+        "reports/public/rnnoise_build.json",
+    )
+    for relative in files:
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / relative, target)
+    (tmp_path / "LICENSE").write_text(
+        "Apache License\nVersion 2.0, January 2004\nAS IS BASIS\n",
+        encoding="utf-8",
+    )
+
+    result = publish_readiness(tmp_path)
+
+    assert result["checks"]["required_documents"] is True
+    assert result["checks"]["license_spdx"] is False
+    assert result["scores"]["github"] == 9.0
+    assert result["status"] == "fail"
 
 
 def test_publish_readiness_requires_version_consistency(tmp_path: Path) -> None:

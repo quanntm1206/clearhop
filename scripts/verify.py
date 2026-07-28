@@ -1143,6 +1143,27 @@ def publish_readiness(root: Path) -> dict[str, object]:
     checks: dict[str, bool] = {}
     readme = root / "README.md"
     readme_text = readme.read_text(encoding="utf-8", errors="replace") if readme.is_file() else ""
+    license_path = root / "LICENSE"
+    license_text = license_path.read_text(encoding="utf-8", errors="replace") if license_path.is_file() else ""
+    apache_markers = (
+        "Apache License",
+        "Version 2.0, January 2004",
+        "TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION",
+        "1. Definitions.",
+        "2. Grant of Copyright License.",
+        "3. Grant of Patent License.",
+        "4. Redistribution.",
+        "5. Submission of Contributions.",
+        "6. Trademarks.",
+        "7. Disclaimer of Warranty.",
+        "8. Limitation of Liability.",
+        "9. Accepting Warranty or Additional Liability.",
+        "END OF TERMS AND CONDITIONS",
+        "You may obtain a copy of the License at",
+        "http://www.apache.org/licenses/LICENSE-2.0",
+        "limitations under the License.",
+    )
+    checks["license_spdx"] = all(marker in license_text for marker in apache_markers)
     checks["required_documents"] = all(
         (root / path).is_file() and bool((root / path).read_text(encoding="utf-8", errors="replace").strip())
         for path in required_docs
@@ -1275,13 +1296,13 @@ def publish_readiness(root: Path) -> dict[str, object]:
     })
     checks["production_receipt"] = public_production.get("status") == "pass"
     checks["research_receipt"] = public_research.get("status") == "pass"
-    github_checks = ("required_documents", "public_receipts", "public_receipt_hygiene", "readme_public_evidence", "no_placeholders", "version_consistency", "workflow_surface", "inventory", "excluded_payloads_untracked")
+    github_checks = ("required_documents", "license_spdx", "public_receipts", "public_receipt_hygiene", "readme_public_evidence", "no_placeholders", "version_consistency", "workflow_surface", "inventory", "excluded_payloads_untracked")
     production_checks = ("package_metadata", "workflow_surface", "production_receipt", "public_receipts", "version_consistency")
     research_checks = ("research_status_separated", "research_receipt_schema", "research_receipt", "public_receipts", "no_placeholders")
     scores = {name: round(10.0 * sum(checks.get(key, False) for key in group) / len(group), 2) for name, group in (("github", github_checks), ("production", production_checks), ("research", research_checks))}
     research_caps = {"two_reproduced": 10.0, "one_plus_recipe": 9.0, "insufficient": 8.0}
     scores["research"] = min(scores["research"], research_caps.get(str(research_coverage["tier"]), 8.0))
-    status = "pass" if all(score >= 9.0 for score in scores.values()) else "fail"
+    status = "pass" if checks["license_spdx"] and all(score >= 9.0 for score in scores.values()) else "fail"
     return {
         "schema_version": 1,
         "status": status,
