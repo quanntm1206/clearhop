@@ -25,6 +25,12 @@ def test_ci_installs_desktop_and_runs_fail_closed_gates() -> None:
         assert token in text
 
 
+def test_ci_avoids_duplicate_feature_branch_runs() -> None:
+    text = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+    assert "push:\n    branches: [main]" in text
+    assert "pull_request:" in text
+
+
 def test_ci_runs_clean_offline_installer_and_real_denoise_outside_repo() -> None:
     text = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
     installer_step = text[text.index("Clean offline installer integration") :]
