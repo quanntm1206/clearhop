@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mobile-deep-filter-net"
+version = "0.1.0"
+description = "Causal 16 kHz speech noise-reduction training and streaming pipeline"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "scipy",
+  "soundfile",
+  "torch",
+  "tensorboard",
+]
+
+[project.optional-dependencies]
+audio = ["librosa", "pyroomacoustics"]
+metrics = ["pystoi", "pesq"]
+export = ["onnx", "onnxruntime", "onnxscript"]
+dev = ["pytest"]
+
+[tool.setuptools.packages.find]
+include = ["src*"]

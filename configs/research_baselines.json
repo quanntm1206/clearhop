@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "project": "https://github.com/quanntm1206/clearhop",
+  "retrieved_at": "2026-07-28",
+  "protocol": {
+    "reference_sample_rate": 16000,
+    "metrics": ["snri_db", "si_sdri_db", "stoi", "pesq"],
+    "slices": ["primary_comparison", "audit", "robustness"],
+    "no_network": true,
+    "weights_policy": "third-party weights are not bundled until license and hash review"
+  },
+  "baselines": [
+    {
+      "name": "ClearHop",
+      "source_url": "https://github.com/quanntm1206/clearhop",
+      "license": "Apache-2.0",
+      "native_sample_rate": 16000,
+      "runtime": "receipt",
+      "weights_bundled": true,
+      "evidence_class": "reproduced_local",
+      "provenance": {
+        "commit": null,
+        "commit_url": "https://github.com/quanntm1206/clearhop/commits/main",
+        "version": "0.1.0",
+        "retrieved_at": "2026-07-28",
+        "weight_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789"
+      },
+      "recipe": "python scripts/model_comparison.py --output reports/public/model_comparison.json"
+    },
+    {
+      "name": "Frozen historical baseline",
+      "source_url": "https://github.com/quanntm1206/clearhop/tree/main/reports/public",
+      "license": "project receipt",
+      "native_sample_rate": 16000,
+      "runtime": "receipt",
+      "weights_bundled": false,
+      "evidence_class": "reproduced_local",
+      "provenance": {
+        "commit": null,
+        "commit_url": "https://github.com/quanntm1206/clearhop/commits/main",
+        "version": "frozen receipt",
+        "retrieved_at": "2026-07-28",
+        "weight_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789"
+      },
+      "recipe": "python scripts/model_comparison.py --output reports/public/model_comparison.json"
+    },
+    {
+      "name": "DeepFilterNet3",
+      "source_url": "https://github.com/Rikorose/DeepFilterNet",
+      "paper_url": "https://arxiv.org/abs/2305.08227",
+      "license": "Apache-2.0 OR MIT",
+      "native_sample_rate": 48000,
+      "runtime": "external-cli",
+      "weights_bundled": false,
+      "evidence_class": "blocked",
+      "command": null,
+      "provenance": {
+        "commit": "d375b2d8309e0935d165700c91da9de862a99c31",
+        "commit_url": "https://github.com/Rikorose/DeepFilterNet/commit/d375b2d8309e0935d165700c91da9de862a99c31",
+        "version": "v0.5.6 release; source commit pinned",
+        "retrieved_at": "2026-07-28",
+        "weight_sha256": null,
+        "weight_sha256_reason": "upstream release asset not downloaded; redistribution review pending"
+      },
+      "recipe": "Install the upstream deep-filter v0.5.6 release; configure command argv with {input}/{output}; rerun this script."
+    },
+    {
+      "name": "RNNoise",
+      "source_url": "https://github.com/xiph/rnnoise",
+      "license": "BSD-3-Clause",
+      "native_sample_rate": 48000,
+      "runtime": "external-cli",
+      "weights_bundled": false,
+      "evidence_class": "blocked",
+      "command": null,
+      "provenance": {
+        "commit": "70f1d256acd4b34a572f999a05c87bf00b67730d",
+        "commit_url": "https://github.com/xiph/rnnoise/commit/70f1d256acd4b34a572f999a05c87bf00b67730d",
+        "version": "v0.2 release; source commit pinned",
+        "retrieved_at": "2026-07-28",
+        "weight_sha256": null,
+        "weight_sha256_reason": "upstream model files not downloaded; redistribution review pending"
+      },
+      "recipe": "Build xiph/rnnoise at the pinned commit; provide a non-shell CLI wrapper accepting WAV input/output; rerun this script."
+    },
+    {
+      "name": "DTLN",
+      "source_url": "https://github.com/breizhn/DTLN",
+      "paper_url": "https://www.isca-archive.org/interspeech_2020/westhausen20_interspeech.html",
+      "license": "MIT",
+      "native_sample_rate": 16000,
+      "runtime": "external-cli",
+      "weights_bundled": false,
+      "evidence_class": "blocked",
+      "command": null,
+      "provenance": {
+        "commit": "1de1f15a8b5b7e1c44905618ff2ef70ca8277fbc",
+        "commit_url": "https://github.com/breizhn/DTLN/commit/1de1f15a8b5b7e1c44905618ff2ef70ca8277fbc",
+        "version": "source commit pinned (no GitHub release)",
+        "retrieved_at": "2026-07-28",
+        "weight_sha256": null,
+        "weight_sha256_reason": "pretrained model not downloaded; redistribution review pending"
+      },
+      "recipe": "Clone breizhn/DTLN at the pinned commit; install TensorFlow runtime and expose a WAV wrapper; rerun this script."
+    },
+    {
+      "name": "WebRTC NS",
+      "source_url": "https://webrtc.googlesource.com/src/",
+      "license": "WebRTC Software License",
+      "native_sample_rate": 16000,
+      "runtime": "external-cli",
+      "weights_bundled": false,
+      "evidence_class": "blocked",
+      "command": null,
+      "provenance": {
+        "commit": null,
+        "commit_url": "https://webrtc.googlesource.com/src/+/refs/heads/main/",
+        "version": "main (commit must be pinned by reproducer)",
+        "retrieved_at": "2026-07-28",
+        "weight_sha256": null,
+        "weight_sha256_reason": "classical reference has no model weight artifact; runtime not configured"
+      },
+      "recipe": "Build WebRTC Audio Processing at a pinned commit with NS enabled; expose a WAV wrapper and record the commit before rerunning."
+    }
+  ]
+}

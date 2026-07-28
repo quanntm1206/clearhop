@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "ClearHop"
+message: "If ClearHop supports your research, please cite this software."
+type: software
+authors:
+  - family-names: "Tran"
+    given-names: "Quan"
+version: "0.1.0"
+date-released: "2026-07-28"
+repository-code: "https://github.com/quanntm1206/clearhop"
+url: "https://github.com/quanntm1206/clearhop"
+license: Apache-2.0

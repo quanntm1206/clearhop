@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install desktop and development dependencies
+        run: python -m pip install -e ".[desktop,dev]"
+      - name: Test suite
+        run: python -m pytest -q
+      - name: Production verifier
+        run: python scripts/verify.py --production-readiness
+      - name: Research verifier
+        run: python scripts/verify.py --research-readiness
+      - name: Publish readiness verifier
+        run: python scripts/verify.py --publish-readiness
+      - name: Desktop headless smoke
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m pytest -q tests/test_desktop_e2e.py tests/test_desktop_app.py
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install desktop and development dependencies
+        shell: pwsh
+        run: python -m pip install -e ".[desktop,dev]"
+      - name: Test suite
+        shell: pwsh
+        run: python -m pytest -q
+      - name: Production, research, and publish gates
+        shell: pwsh
+        run: |
+          python scripts/verify.py --production-readiness
+          python scripts/verify.py --research-readiness
+          python scripts/verify.py --publish-readiness
+      - name: Actual offscreen desktop E2E
+        shell: pwsh
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: python -m pytest -q tests/test_desktop_e2e.py
+      - name: Installer dry run
+        shell: pwsh
+        run: .\scripts\install-desktop.ps1 -DryRun -Offline

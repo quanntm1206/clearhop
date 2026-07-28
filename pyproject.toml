@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clearhop"
+version = "0.1.0"
+description = "Local causal speech denoising for reproducible research and real-time deployment"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Quanntm1206"}]
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "scipy",
+  "soundfile",
+  "torch",
+  "tensorboard",
+]
+
+[project.optional-dependencies]
+audio = ["librosa", "pyroomacoustics"]
+metrics = ["pystoi", "pesq"]
+export = ["onnx", "onnxruntime", "onnxscript"]
+desktop = ["PySide6"]
+package = ["pyinstaller", "build"]
+dev = ["pytest", "build"]
+
+[project.scripts]
+noise-reduce-desktop = "desktop.app:main"
+
+[project.urls]
+Homepage = "https://github.com/quanntm1206/clearhop"
+Repository = "https://github.com/quanntm1206/clearhop"
+Issues = "https://github.com/quanntm1206/clearhop/issues"
+
+[tool.setuptools.packages.find]
+include = ["src*", "desktop*", "research*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = ["reports", "build", "dist", ".artifacts", ".venv"]

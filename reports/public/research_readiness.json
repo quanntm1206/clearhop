@@ -1,0 +1,1309 @@
+{
+  "evidence": {
+    "failure_analysis": {
+      "failure_counts": {
+        "si_sdr_delta": 146,
+        "snr_non_positive": 2,
+        "stoi_delta": 47
+      },
+      "n": 500,
+      "schema_version": 1,
+      "subgroup_failure_counts": {
+        "noise_family:esc50": 39,
+        "noise_family:other": 140,
+        "snr_band:high": 52,
+        "snr_band:low": 27,
+        "snr_band:mid": 100,
+        "speaker:1052": 47,
+        "speaker:112": 60,
+        "speaker:1121": 26,
+        "speaker:1165": 28,
+        "speaker:122": 18
+      },
+      "worst_cases": [
+        {
+          "index": 486,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "mid",
+            "snr_db": 7.013102219466159,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -3.6862831964919813,
+          "snr_delta": 2.843032987887981,
+          "stoi_delta": 0.010943436087096914
+        },
+        {
+          "index": 498,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "high",
+            "snr_db": 11.926873239085227,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -3.432266749140105,
+          "snr_delta": 8.984733293304858,
+          "stoi_delta": 0.002697828338911079
+        },
+        {
+          "index": 406,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "high",
+            "snr_db": 17.006224519084867,
+            "speaker": "1165"
+          },
+          "si_sdr_delta": -2.984497071752882,
+          "snr_delta": 6.103883209014838,
+          "stoi_delta": 0.02336573501421446
+        },
+        {
+          "index": 220,
+          "metadata": {
+            "noise_family": "esc50",
+            "snr_band": "high",
+            "snr_db": 17.513598325981985,
+            "speaker": "112"
+          },
+          "si_sdr_delta": -1.7943844488742862,
+          "snr_delta": 3.7661802974338996,
+          "stoi_delta": 0.020714794782397572
+        },
+        {
+          "index": 499,
+          "metadata": {
+            "noise_family": "esc50",
+            "snr_band": "mid",
+            "snr_db": 0.20388641647124928,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -1.7798581211253441,
+          "snr_delta": 2.6578482054921047,
+          "stoi_delta": 0.018169275991399836
+        },
+        {
+          "index": 485,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "high",
+            "snr_db": 12.176758049215955,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -1.7666235248443165,
+          "snr_delta": 4.138930306040651,
+          "stoi_delta": 0.013352843974668405
+        },
+        {
+          "index": 478,
+          "metadata": {
+            "noise_family": "esc50",
+            "snr_band": "high",
+            "snr_db": 14.073657415370604,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -1.758780727169074,
+          "snr_delta": 7.527692936478258,
+          "stoi_delta": -0.006330001097898497
+        },
+        {
+          "index": 440,
+          "metadata": {
+            "noise_family": "esc50",
+            "snr_band": "mid",
+            "snr_db": 1.0936679099911153,
+            "speaker": "1165"
+          },
+          "si_sdr_delta": -1.6201281064464403,
+          "snr_delta": 7.295263184962411,
+          "stoi_delta": 0.022132171276541435
+        },
+        {
+          "index": 477,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "mid",
+            "snr_db": 6.904967523286251,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -1.6070987690250793,
+          "snr_delta": 4.767409452500845,
+          "stoi_delta": 0.016232847528821925
+        },
+        {
+          "index": 132,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "mid",
+            "snr_db": 1.312173928159405,
+            "speaker": "112"
+          },
+          "si_sdr_delta": -1.588973543248276,
+          "snr_delta": 2.427294931891162,
+          "stoi_delta": -0.0021732617035316038
+        },
+        {
+          "index": 254,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "high",
+            "snr_db": 10.749774225308212,
+            "speaker": "1121"
+          },
+          "si_sdr_delta": -1.5248311392568379,
+          "snr_delta": 13.18615011665837,
+          "stoi_delta": -0.005143299664085332
+        },
+        {
+          "index": 111,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "low",
+            "snr_db": -4.603420340246759,
+            "speaker": "1052"
+          },
+          "si_sdr_delta": -1.5217284546143404,
+          "snr_delta": 9.324207984364167,
+          "stoi_delta": -0.001858276930662428
+        },
+        {
+          "index": 302,
+          "metadata": {
+            "noise_family": "esc50",
+            "snr_band": "high",
+            "snr_db": 10.761566013022401,
+            "speaker": "1121"
+          },
+          "si_sdr_delta": -1.5192273473658418,
+          "snr_delta": 10.067521177158701,
+          "stoi_delta": 0.007285483808033066
+        },
+        {
+          "index": 227,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "mid",
+            "snr_db": 8.129485456267766,
+            "speaker": "112"
+          },
+          "si_sdr_delta": -1.4967803584081771,
+          "snr_delta": 4.486727359091842,
+          "stoi_delta": 0.009598810928278079
+        },
+        {
+          "index": 232,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "high",
+            "snr_db": 13.487790787549265,
+            "speaker": "112"
+          },
+          "si_sdr_delta": -1.489394135855287,
+          "snr_delta": 5.011589925146645,
+          "stoi_delta": 0.008655175433582962
+        },
+        {
+          "index": 482,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "high",
+            "snr_db": 11.793078278478744,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -1.4130531542531788,
+          "snr_delta": 6.906291908969752,
+          "stoi_delta": 0.02890412337080539
+        },
+        {
+          "index": 140,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "low",
+            "snr_db": -2.3311748846456943,
+            "speaker": "112"
+          },
+          "si_sdr_delta": -1.4095421956633523,
+          "snr_delta": 4.143101098695574,
+          "stoi_delta": 0.03506035714043754
+        },
+        {
+          "index": 147,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "mid",
+            "snr_db": 8.381733671386701,
+            "speaker": "112"
+          },
+          "si_sdr_delta": -1.402126065842113,
+          "snr_delta": 7.742249827764484,
+          "stoi_delta": 0.01262871240284491
+        },
+        {
+          "index": 170,
+          "metadata": {
+            "noise_family": "esc50",
+            "snr_band": "mid",
+            "snr_db": 1.9060567292433337,
+            "speaker": "112"
+          },
+          "si_sdr_delta": -1.3218055239975817,
+          "snr_delta": 3.702481414532318,
+          "stoi_delta": 0.0022495891367051435
+        },
+        {
+          "index": 493,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "low",
+            "snr_db": -0.20707491618841445,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -1.3048289576378016,
+          "snr_delta": 4.43058051125398,
+          "stoi_delta": 0.0005596658531129561
+        },
+        {
+          "index": 331,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "high",
+            "snr_db": 15.51331115911025,
+            "speaker": "1121"
+          },
+          "si_sdr_delta": -1.2252845740688176,
+          "snr_delta": 9.984565853389968,
+          "stoi_delta": 0.007809658102678418
+        },
+        {
+          "index": 492,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "mid",
+            "snr_db": 0.894477113171158,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -1.2038552275610364,
+          "snr_delta": 1.8543283133022515,
+          "stoi_delta": -0.0031706668534341453
+        },
+        {
+          "index": 236,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "mid",
+            "snr_db": 9.790065559054062,
+            "speaker": "112"
+          },
+          "si_sdr_delta": -1.0969368199776817,
+          "snr_delta": 3.488163586962789,
+          "stoi_delta": 0.014874567028776098
+        },
+        {
+          "index": 494,
+          "metadata": {
+            "noise_family": "esc50",
+            "snr_band": "high",
+            "snr_db": 12.092733399551104,
+            "speaker": "122"
+          },
+          "si_sdr_delta": -1.0924771730919396,
+          "snr_delta": 6.05518859869716,
+          "stoi_delta": 0.018107519890915413
+        },
+        {
+          "index": 58,
+          "metadata": {
+            "noise_family": "other",
+            "snr_band": "mid",
+            "snr_db": 8.869968817205988,
+            "speaker": "1052"
+          },
+          "si_sdr_delta": -1.078743670349084,
+          "snr_delta": 9.423748212688238,
+          "stoi_delta": 0.000827675431118613
+        }
+      ]
+    },
+    "failure_audio": {
+      "checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
+      "items": [
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_486_clean.wav",
+              "sha256": "3406417fb987cc4ee8a6b264c745c19d828349a7d6a278719c0316926e1cd9a2"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_486_enhanced.wav",
+              "sha256": "e9d441758cc65074cc2aeb4734bef875557a1d04c1bdc23f9609539dd4e17954"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_486_noisy.wav",
+              "sha256": "bb75002efa09c78d95864704174a463ab9be8ec4fd35f5f5d649cc5717e3c52a"
+            }
+          },
+          "index": 486
+        },
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_498_clean.wav",
+              "sha256": "590b63b659c3e57b446ab53146cae12e9c6005c947474895307a5ad82e747f27"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_498_enhanced.wav",
+              "sha256": "6564d6be75ffc9057a1306bc200d5906f422d5e095c43ce3433abc490a0d1259"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_498_noisy.wav",
+              "sha256": "7a6a211e2771759c469207e6f104cf05292924c3995a7bea5f24e3c7fbee34b5"
+            }
+          },
+          "index": 498
+        },
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_406_clean.wav",
+              "sha256": "679bf5bb6fd043398d628d0bbbe09129bdf49e5a483eeab86837256d0c823611"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_406_enhanced.wav",
+              "sha256": "3cde051e93783f87c90a7e5d97ab135ca064ea0611dadc754e995afe5a5c6cb5"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_406_noisy.wav",
+              "sha256": "b00ef6d762a51f9d4a905aa2ef7befc9e041f63b4fa4b732166f5b06f5e80866"
+            }
+          },
+          "index": 406
+        },
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_220_clean.wav",
+              "sha256": "94263f72ef7513c0696b645dd27de0574131536bd1ff010d85a6b32aa28410aa"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_220_enhanced.wav",
+              "sha256": "0dbe402aa47662f7cad36e2dbe4089b6f214c9a2745518848f127fad214176bc"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_220_noisy.wav",
+              "sha256": "1ce768c526f89bbe25785f48409db53837d4a3bce13641cb07b15a3eafe2fda1"
+            }
+          },
+          "index": 220
+        },
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_499_clean.wav",
+              "sha256": "3cc96e11e2bdef9c8cbb7300d343d0d285fb38b9503cc919e5a7a99f05f3c125"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_499_enhanced.wav",
+              "sha256": "9b27f3b45d7bf3ba1d0423a82911db6ff3fe5e62a7836da1895db79b6a4612e9"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_499_noisy.wav",
+              "sha256": "26377250c496f059e68be573366a060a32b9ecc49432a11e36779c944ed19fd3"
+            }
+          },
+          "index": 499
+        },
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_485_clean.wav",
+              "sha256": "435932dff49265b0fe36dc173fdd49dd8db0dd3c012d96910e87e0e071f34016"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_485_enhanced.wav",
+              "sha256": "1c672b8ce46e7c865721becfe24fb133eb47b6a07351caa00784ed6b4f34222b"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_485_noisy.wav",
+              "sha256": "8071fe4768f7cb756b69b3d5357ad4a52e63e7c7e4326d2281b945286d92bbc9"
+            }
+          },
+          "index": 485
+        },
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_478_clean.wav",
+              "sha256": "2d73def0a2ea7999e098524308b4beb2e3a6afc904d14dcdc05892e749de45af"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_478_enhanced.wav",
+              "sha256": "1a5cb5f0a6c783c53789d1d8d82b4668fb57dd5cb2974f234fed2c3d72ca015f"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_478_noisy.wav",
+              "sha256": "ff96ebfdfc634fcb402a15fb434b85d7aba1c8f4068f46df3ee714235403f553"
+            }
+          },
+          "index": 478
+        },
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_440_clean.wav",
+              "sha256": "02f2c96dff52ca7f6578442e6eaf9154082a2cf18fce2d17b545b08cb93900ea"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_440_enhanced.wav",
+              "sha256": "2fcd3d47126f6c89d3db83dc28accb7716300b3d9f1fbca0a8c4077869a99727"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_440_noisy.wav",
+              "sha256": "d5238478646c0d0181d8eae778d8ec9f56fbe9677f2f9bcf785fd91116a80788"
+            }
+          },
+          "index": 440
+        },
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_477_clean.wav",
+              "sha256": "448152ad0f972d4a2d963139b1d7ad1425a6c83ac565a82eb210d8a24e7bbbeb"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_477_enhanced.wav",
+              "sha256": "a7205043dc84504d7c169ed8fabf4b3116bfb6da75eb5d5f66efc8222c642983"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_477_noisy.wav",
+              "sha256": "1946093f848482a6ad227628c1dd494f0e367de449aaf42bd737c63044a4b1ab"
+            }
+          },
+          "index": 477
+        },
+        {
+          "files": {
+            "clean": {
+              "path": "reports/generated/failure_audio/item_132_clean.wav",
+              "sha256": "1ae557c93fe7737455cd6fb681b1037cf513a3ed05d7f93c348047fabd3ac44d"
+            },
+            "enhanced": {
+              "path": "reports/generated/failure_audio/item_132_enhanced.wav",
+              "sha256": "ce9df812b0cb8c9f762eac6bdafcc1346e772e15a92e65f8ebbcb0e2637ad9e4"
+            },
+            "noisy": {
+              "path": "reports/generated/failure_audio/item_132_noisy.wav",
+              "sha256": "ccd56238d9928e42c2ef42594b8c04d0eea043035f21a716c1c5bd74fa63d4bf"
+            }
+          },
+          "index": 132
+        }
+      ],
+      "schema_version": 1,
+      "status": "pass"
+    },
+    "research_evaluations": {
+      "all_seed_acceptance": true,
+      "arm": "complex_nmse_sisdr_beta_0p03",
+      "runs": [
+        {
+          "acceptance": {
+            "audit": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            },
+            "comparison": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            }
+          },
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_17\\best.pth",
+          "checkpoint_sha256": "8399cd449e9cad32a2fc72b351fc9cca0cb01f3523bfcef58293760992161ea9",
+          "config": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_17/resolved_config.yaml",
+          "config_sha256": "1c154aa46a196b82c8259335e8fb943ba723929ce9a6c01eab2f4d60c3ec297e",
+          "evaluations": {
+            "audit": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_17/audit_evaluation.json",
+              "sha256": "474299efede06c9aa8383f152e8737db0a48ee3eb1dafe06b63cbd39eeb78e3e"
+            },
+            "comparison": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_17/comparison_evaluation.json",
+              "sha256": "69eb681a57bd70f9b07bf8840567dd3b86b2301ff496a35ffaacd36cf7985480"
+            }
+          },
+          "seed": 17,
+          "status": "pass"
+        },
+        {
+          "acceptance": {
+            "audit": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            },
+            "comparison": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            }
+          },
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_29\\best.pth",
+          "checkpoint_sha256": "6aae6cf6a86eecaef5649781941188e2d3177cc2da7794661d1fed8d3642842d",
+          "config": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_29/resolved_config.yaml",
+          "config_sha256": "993af5de81cb9b3199f6c6bee35fa3f162fa98c2f96d27a9495b13ac317de45c",
+          "evaluations": {
+            "audit": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_29/audit_evaluation.json",
+              "sha256": "7362ce4258c890eac8371ec808e0b25fdef03e906f4b028a9a06f7467c160328"
+            },
+            "comparison": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_29/comparison_evaluation.json",
+              "sha256": "4abcf3bb431c1a06786985397b72eaffc44757cc06160b87bcb49a83c5d605ea"
+            }
+          },
+          "seed": 29,
+          "status": "pass"
+        },
+        {
+          "acceptance": {
+            "audit": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            },
+            "comparison": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            }
+          },
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_43\\best.pth",
+          "checkpoint_sha256": "7bf78619b2730a60eaace983c4362601f9f6e3d13486795212788dc511225e76",
+          "config": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_43/resolved_config.yaml",
+          "config_sha256": "730b14407c7911704e22b62871334900253ddabda8fd81a43930a7257c820a38",
+          "evaluations": {
+            "audit": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_43/audit_evaluation.json",
+              "sha256": "01c24df3561b3ee6dd4708f5561a283987f5d13db3f205d34ac87186ef1c0d39"
+            },
+            "comparison": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_43/comparison_evaluation.json",
+              "sha256": "0449873fc8b34a44a44a06b26e9686b502a6c515e00f34c0650d30c011d253b6"
+            }
+          },
+          "seed": 43,
+          "status": "pass"
+        },
+        {
+          "acceptance": {
+            "audit": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            },
+            "comparison": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            }
+          },
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_59\\best.pth",
+          "checkpoint_sha256": "f3194f87a8b8391e92e92fdfe74160018e4b0f92f696a2160256eb26ed0e5e4f",
+          "config": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_59/resolved_config.yaml",
+          "config_sha256": "5cbc6487ba4aff68a5cc544d1ea964d179e17b6b00e3499d3b5a83992737a93b",
+          "evaluations": {
+            "audit": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_59/audit_evaluation.json",
+              "sha256": "138e2466d137bf5af226ae5b986cfe441abb545e1c8986687570dc0a4041fa94"
+            },
+            "comparison": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_59/comparison_evaluation.json",
+              "sha256": "13769b194208248bc33385c2bcc29864ad50e29cb77ac41fe80bb984a13231d0"
+            }
+          },
+          "seed": 59,
+          "status": "pass"
+        },
+        {
+          "acceptance": {
+            "audit": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            },
+            "comparison": {
+              "checks": {
+                "gain_error": true,
+                "pesq_delta": true,
+                "polarity": true,
+                "positive_gain": true,
+                "si_sdri_delta": true,
+                "snri_positive": true,
+                "stoi_delta": true
+              },
+              "status": "pass"
+            }
+          },
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_71\\best.pth",
+          "checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
+          "config": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_71/resolved_config.yaml",
+          "config_sha256": "ca7eec99900b76b131a22ecb07fb665e0e9415fb795bebb3e7951cd64ab7d6e3",
+          "evaluations": {
+            "audit": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_71/audit_evaluation.json",
+              "sha256": "997f9952f6c56a0bc2263a8ef1a8a7ac1731d34f13110d4d260dbebd1db691df"
+            },
+            "comparison": {
+              "path": "checkpoints/gain_calibration/research/complex_nmse_sisdr_beta_0p03/seed_71/comparison_evaluation.json",
+              "sha256": "cfc06669405a9d022dbe679b6f434f8a32dc56702bf49c0f31cffec0e30204a8"
+            }
+          },
+          "seed": 71,
+          "status": "pass"
+        }
+      ],
+      "schema_version": 1,
+      "seeds": [
+        17,
+        29,
+        43,
+        59,
+        71
+      ],
+      "stage": "research-evaluation",
+      "status": "completed"
+    },
+    "research_selection": {
+      "metric_order": [
+        "validation_snri",
+        "validation_si_sdri",
+        "absolute_gain_error"
+      ],
+      "parity": {
+        "path": "reports/generated/production_export_parity.json",
+        "sha256": "43055fdf3ab590e7614fd797c533eacd662ade89fe412e8d04f3214b62297d5a"
+      },
+      "production_checkpoint": ".\\checkpoints\\production\\best.pth",
+      "production_checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
+      "ranked_validation_metrics": [
+        {
+          "gain_error_db_median": -1.6870749578757867,
+          "projection_gain_median": 0.8234671056270599,
+          "seed": 71,
+          "si_sdri": 3.6674133472833903,
+          "snri": 4.059767647818809,
+          "stoi": 0.7936065247826257
+        },
+        {
+          "gain_error_db_median": -1.692853563008438,
+          "projection_gain_median": 0.8229197859764099,
+          "seed": 29,
+          "si_sdri": 3.659848366956571,
+          "snri": 4.04690673058453,
+          "stoi": 0.7897871285994947
+        },
+        {
+          "gain_error_db_median": -1.8947718274646372,
+          "projection_gain_median": 0.8040104806423187,
+          "seed": 17,
+          "si_sdri": 3.64739326908224,
+          "snri": 4.027131985659654,
+          "stoi": 0.7931327276061684
+        },
+        {
+          "gain_error_db_median": -1.7635024426527046,
+          "projection_gain_median": 0.8162531852722168,
+          "seed": 43,
+          "si_sdri": 3.6225042871318776,
+          "snri": 3.9914158662485377,
+          "stoi": 0.7906142902487523
+        },
+        {
+          "gain_error_db_median": -1.770392733163452,
+          "projection_gain_median": 0.8156059086322784,
+          "seed": 59,
+          "si_sdri": 3.5287646728783333,
+          "snri": 3.935495264408658,
+          "stoi": 0.7931276596387048
+        }
+      ],
+      "schema_version": 1,
+      "selected_seed": 71,
+      "selection_basis": "validation",
+      "source_checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_71\\best.pth",
+      "source_checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
+      "status": "pass"
+    },
+    "research_training": {
+      "arm": "complex_nmse_sisdr_beta_0p03",
+      "planned_run_count": 5,
+      "runs": [
+        {
+          "arm": "complex_nmse_sisdr_beta_0p03",
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_17\\best.pth",
+          "checkpoint_sha256": "8399cd449e9cad32a2fc72b351fc9cca0cb01f3523bfcef58293760992161ea9",
+          "config_sha256": "0142d17af40633773a061e72e12ae141cf2b720dc2218e012afcf74062205f52",
+          "elapsed_seconds": 3773.0951964999986,
+          "ended_utc": "2026-07-27T23:57:23.451469+00:00",
+          "evaluation_command": [
+            "<local-runtime-redacted>",
+            "scripts/evaluate.py",
+            "--checkpoint",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_17\\best.pth",
+            "--config",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_17\\resolved_config.yaml",
+            "--manifest",
+            ".\\manifests\\v2\\fold_0_val.jsonl",
+            "--output",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_17\\validation_evaluation.json",
+            "--offset",
+            "0",
+            "--max-items",
+            "500",
+            "--profile",
+            "screen"
+          ],
+          "evaluation_returncode": 0,
+          "evaluation_stderr_tail": "",
+          "evaluation_stdout_tail": "{\n  \"enhanced\": {\n    \"gain_error_db\": {\n      \"max\": -0.07478773144116392,\n      \"mean\": -2.313716157063497,\n      \"median\": -1.8947718274646372,\n      \"min\": -13.496603597871735,\n      \"std\": 1.8230558232940086\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 0.9914267063140869,\n      \"mean\": 0.7812803085446358,\n      \"median\": 0.8040104806423187,\n      \"min\": 0.2114315629005432,\n      \"std\": 0.13964134297433434\n    },\n    \"si_sdr\": {\n      \"max\": 19.46573971667931,\n      \"mean\": 7.432943813301486,\n      \"median\": 7.522732101871737,\n      \"min\": -9.365054992576646,\n      \"std\": 5.002297000146238\n    },\n    \"si_sdr_improvement_mean\": 3.64739326908224,\n    \"snr\": {\n      \"max\": 19.33158976824317,\n      \"mean\": 8.221995532478878,\n      \"median\": 8.031307715182152,\n      \"min\": -0.8768584246236161,\n      \"std\": 3.956075565387819\n    },\n    \"snr_improvement_mean\": 4.027131985659654,\n    \"stoi\": {\n      \"max\": 0.9887615037400208,\n      \"mean\": 0.7931327276061684,\n      \"median\": 0.8266199263282439,\n      \"min\": 0.31149008410235385,\n      \"std\": 0.14113920464605678\n    }\n  },\n  \"metadata\": {\n    \"checkpoint\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_17\\\\best.pth\",\n    \"checkpoint_schema_version\": 2,\n    \"checkpoint_sha256\": \"8399cd449e9cad32a2fc72b351fc9cca0cb01f3523bfcef58293760992161ea9\",\n    \"config\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_17\\\\resolved_config.yaml\",\n    \"device\": \"cuda\",\n    \"evaluation_profile\": \"screen\",\n    \"manifest\": \"D:\\\\0. Noise reduce\\\\manifests\\\\v2\\\\fold_0_val.jsonl\",\n    \"manifest_fingerprint\": \"6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c\",\n    \"max_items\": 500,\n    \"schema_version\": 1,\n    \"slice_count\": 500,\n    \"slice_fingerprint\": \"0a8e93271bbbaaebe84741b3df2d185fc114be2e426a310cf3287cce3bdd4fd4\",\n    \"slice_name\": null,\n    \"slice_offset\": 0,\n    \"torch_version\": \"2.13.0+cu130\"\n  },\n  \"noisy\": {\n    \"gain_error_db\": {\n      \"max\": 0.6306023697258273,\n      \"mean\": -0.4835668290045892,\n      \"median\": -0.1118264472939483,\n      \"min\": -9.59227722539997,\n      \"std\": 1.1979742934719233\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 1.075301170349121,\n      \"mean\": 0.9532790620923042,\n      \"median\": 0.9872080385684967,\n      \"min\": 0.33142566680908203,\n      \"std\": 0.09939183819768155\n    },\n    \"si_sdr\": {\n      \"max\": 18.391058303855207,\n      \"mean\": 3.7855505442192454,\n      \"median\": 3.4266913406989303,\n      \"min\": -14.66841880720391,\n      \"std\": 6.278482041839451\n    },\n    \"snr\": {\n      \"max\": 18.443406940795445,\n      \"mean\": 4.194863546819224,\n      \"median\": 3.6320967707058043,\n      \"min\": -9.262449666648337,\n      \"std\": 5.950669727152772\n    },\n    \"stoi\": {\n      \"max\": 0.9984484786514883,\n      \"mean\": 0.7811401725143192,\n      \"median\": 0.8114270809173065,\n      \"min\": 0.2727854426240623,\n      \"std\": 0.1462436116043549\n    }\n  }\n}\n",
+          "experiment_id": "gain_calibration_research_complex_nmse_sisdr_beta_0p03_seed_17",
+          "global_step": 30000,
+          "gpu_metadata": {
+            "device": "cuda",
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch_version": "2.13.0+cu130"
+          },
+          "manifest_fingerprints": {
+            "test": "8e8e0958a96b28b0492cbc0e17be808c138e355fd65b103fabba04050e8b1cf3",
+            "train": "e38622e3e99c6b01d18f0c864f7c331b01d60bf148e1be73dfa2385badad03a6",
+            "val": "6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c"
+          },
+          "max_steps": 30000,
+          "phase": "complete",
+          "resolved_yaml_sha256": "1c154aa46a196b82c8259335e8fb943ba723929ce9a6c01eab2f4d60c3ec297e",
+          "returncode": 0,
+          "scheduler_total_steps": 30000,
+          "schema_version": 1,
+          "seed": 17,
+          "stage": "research",
+          "started_utc": "2026-07-27T22:54:55.735037+00:00",
+          "status": "completed",
+          "stderr_tail": "",
+          "stdout_tail": "",
+          "validation_evaluation_sha256": "30cd71904e3f2257d784dfe0503c200663f8d4895864e29de15ffe3268a46608",
+          "validation_metrics": {
+            "gain_error_db_median": -1.8947718274646372,
+            "projection_gain_median": 0.8040104806423187,
+            "si_sdri": 3.64739326908224,
+            "snri": 4.027131985659654,
+            "stoi": 0.7931327276061684
+          }
+        },
+        {
+          "arm": "complex_nmse_sisdr_beta_0p03",
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_29\\best.pth",
+          "checkpoint_sha256": "6aae6cf6a86eecaef5649781941188e2d3177cc2da7794661d1fed8d3642842d",
+          "config_sha256": "94ccd46b91ab6c46e04b5482e65ebe95b4a617688163a6fc43020b6bbf81f832",
+          "elapsed_seconds": 3880.452694700005,
+          "ended_utc": "2026-07-28T01:02:10.457695+00:00",
+          "evaluation_command": [
+            "<local-runtime-redacted>",
+            "scripts/evaluate.py",
+            "--checkpoint",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_29\\best.pth",
+            "--config",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_29\\resolved_config.yaml",
+            "--manifest",
+            ".\\manifests\\v2\\fold_0_val.jsonl",
+            "--output",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_29\\validation_evaluation.json",
+            "--offset",
+            "0",
+            "--max-items",
+            "500",
+            "--profile",
+            "screen"
+          ],
+          "evaluation_returncode": 0,
+          "evaluation_stderr_tail": "",
+          "evaluation_stdout_tail": "{\n  \"enhanced\": {\n    \"gain_error_db\": {\n      \"max\": -0.03643990422517437,\n      \"mean\": -2.188367902859091,\n      \"median\": -1.692853563008438,\n      \"min\": -11.801618580972518,\n      \"std\": 1.7493659987139696\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 0.9958134889602661,\n      \"mean\": 0.7914993383288383,\n      \"median\": 0.8229197859764099,\n      \"min\": 0.2569916844367981,\n      \"std\": 0.13665416705655753\n    },\n    \"si_sdr\": {\n      \"max\": 19.376841275224162,\n      \"mean\": 7.4453989111758165,\n      \"median\": 7.451811916953618,\n      \"min\": -8.517539702312177,\n      \"std\": 5.046798712224413\n    },\n    \"si_sdr_improvement_mean\": 3.659848366956571,\n    \"snr\": {\n      \"max\": 18.775021494934563,\n      \"mean\": 8.241770277403754,\n      \"median\": 8.003982932446268,\n      \"min\": -1.6058207752803202,\n      \"std\": 4.01634635505783\n    },\n    \"snr_improvement_mean\": 4.04690673058453,\n    \"stoi\": {\n      \"max\": 0.98882733534028,\n      \"mean\": 0.7897871285994947,\n      \"median\": 0.8196468300433921,\n      \"min\": 0.29665360056278584,\n      \"std\": 0.1426459507424835\n    }\n  },\n  \"metadata\": {\n    \"checkpoint\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_29\\\\best.pth\",\n    \"checkpoint_schema_version\": 2,\n    \"checkpoint_sha256\": \"6aae6cf6a86eecaef5649781941188e2d3177cc2da7794661d1fed8d3642842d\",\n    \"config\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_29\\\\resolved_config.yaml\",\n    \"device\": \"cuda\",\n    \"evaluation_profile\": \"screen\",\n    \"manifest\": \"D:\\\\0. Noise reduce\\\\manifests\\\\v2\\\\fold_0_val.jsonl\",\n    \"manifest_fingerprint\": \"6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c\",\n    \"max_items\": 500,\n    \"schema_version\": 1,\n    \"slice_count\": 500,\n    \"slice_fingerprint\": \"0a8e93271bbbaaebe84741b3df2d185fc114be2e426a310cf3287cce3bdd4fd4\",\n    \"slice_name\": null,\n    \"slice_offset\": 0,\n    \"torch_version\": \"2.13.0+cu130\"\n  },\n  \"noisy\": {\n    \"gain_error_db\": {\n      \"max\": 0.6306023697258273,\n      \"mean\": -0.4835668290045892,\n      \"median\": -0.1118264472939483,\n      \"min\": -9.59227722539997,\n      \"std\": 1.1979742934719233\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 1.075301170349121,\n      \"mean\": 0.9532790620923042,\n      \"median\": 0.9872080385684967,\n      \"min\": 0.33142566680908203,\n      \"std\": 0.09939183819768155\n    },\n    \"si_sdr\": {\n      \"max\": 18.391058303855207,\n      \"mean\": 3.7855505442192454,\n      \"median\": 3.4266913406989303,\n      \"min\": -14.66841880720391,\n      \"std\": 6.278482041839451\n    },\n    \"snr\": {\n      \"max\": 18.443406940795445,\n      \"mean\": 4.194863546819224,\n      \"median\": 3.6320967707058043,\n      \"min\": -9.262449666648337,\n      \"std\": 5.950669727152772\n    },\n    \"stoi\": {\n      \"max\": 0.9984484786514883,\n      \"mean\": 0.7811401725143192,\n      \"median\": 0.8114270809173065,\n      \"min\": 0.2727854426240623,\n      \"std\": 0.1462436116043549\n    }\n  }\n}\n",
+          "experiment_id": "gain_calibration_research_complex_nmse_sisdr_beta_0p03_seed_29",
+          "global_step": 30000,
+          "gpu_metadata": {
+            "device": "cuda",
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch_version": "2.13.0+cu130"
+          },
+          "manifest_fingerprints": {
+            "test": "8e8e0958a96b28b0492cbc0e17be808c138e355fd65b103fabba04050e8b1cf3",
+            "train": "e38622e3e99c6b01d18f0c864f7c331b01d60bf148e1be73dfa2385badad03a6",
+            "val": "6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c"
+          },
+          "max_steps": 30000,
+          "phase": "complete",
+          "resolved_yaml_sha256": "993af5de81cb9b3199f6c6bee35fa3f162fa98c2f96d27a9495b13ac317de45c",
+          "returncode": 0,
+          "scheduler_total_steps": 30000,
+          "schema_version": 1,
+          "seed": 29,
+          "stage": "research",
+          "started_utc": "2026-07-27T23:57:52.252750+00:00",
+          "status": "completed",
+          "stderr_tail": "<local-runtime-redacted>",
+          "stdout_tail": "",
+          "validation_evaluation_sha256": "9a528564158dc226889673ec9d744ff5640c15f047f06863e5d4cebf904194ba",
+          "validation_metrics": {
+            "gain_error_db_median": -1.692853563008438,
+            "projection_gain_median": 0.8229197859764099,
+            "si_sdri": 3.659848366956571,
+            "snri": 4.04690673058453,
+            "stoi": 0.7897871285994947
+          }
+        },
+        {
+          "arm": "complex_nmse_sisdr_beta_0p03",
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_43\\best.pth",
+          "checkpoint_sha256": "7bf78619b2730a60eaace983c4362601f9f6e3d13486795212788dc511225e76",
+          "config_sha256": "dc2d64560dcf06846ac24356d72660d7420b57c87035c680130c57851d7468db",
+          "elapsed_seconds": 3401.095081599997,
+          "ended_utc": "2026-07-28T01:58:53.067106+00:00",
+          "evaluation_command": [
+            "<local-runtime-redacted>",
+            "scripts/evaluate.py",
+            "--checkpoint",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_43\\best.pth",
+            "--config",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_43\\resolved_config.yaml",
+            "--manifest",
+            ".\\manifests\\v2\\fold_0_val.jsonl",
+            "--output",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_43\\validation_evaluation.json",
+            "--offset",
+            "0",
+            "--max-items",
+            "500",
+            "--profile",
+            "screen"
+          ],
+          "evaluation_returncode": 0,
+          "evaluation_stderr_tail": "",
+          "evaluation_stdout_tail": "{\n  \"enhanced\": {\n    \"gain_error_db\": {\n      \"max\": -0.22940312168697236,\n      \"mean\": -2.275057250074179,\n      \"median\": -1.7635024426527046,\n      \"min\": -13.399035493642454,\n      \"std\": 1.7729794554118115\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 0.9739347100257874,\n      \"mean\": 0.7838831440806389,\n      \"median\": 0.8162531852722168,\n      \"min\": 0.2138199508190155,\n      \"std\": 0.13552159573838798\n    },\n    \"si_sdr\": {\n      \"max\": 20.04689756438065,\n      \"mean\": 7.408054831351123,\n      \"median\": 7.519436057097355,\n      \"min\": -10.659564820869301,\n      \"std\": 5.102849161691777\n    },\n    \"si_sdr_improvement_mean\": 3.6225042871318776,\n    \"snr\": {\n      \"max\": 19.301512655617504,\n      \"mean\": 8.186279413067762,\n      \"median\": 8.023307490944038,\n      \"min\": -1.6455707419559162,\n      \"std\": 4.017832270358896\n    },\n    \"snr_improvement_mean\": 3.9914158662485377,\n    \"stoi\": {\n      \"max\": 0.9870105104359316,\n      \"mean\": 0.7906142902487523,\n      \"median\": 0.8231880763688357,\n      \"min\": 0.3028093327283171,\n      \"std\": 0.141585172353495\n    }\n  },\n  \"metadata\": {\n    \"checkpoint\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_43\\\\best.pth\",\n    \"checkpoint_schema_version\": 2,\n    \"checkpoint_sha256\": \"7bf78619b2730a60eaace983c4362601f9f6e3d13486795212788dc511225e76\",\n    \"config\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_43\\\\resolved_config.yaml\",\n    \"device\": \"cuda\",\n    \"evaluation_profile\": \"screen\",\n    \"manifest\": \"D:\\\\0. Noise reduce\\\\manifests\\\\v2\\\\fold_0_val.jsonl\",\n    \"manifest_fingerprint\": \"6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c\",\n    \"max_items\": 500,\n    \"schema_version\": 1,\n    \"slice_count\": 500,\n    \"slice_fingerprint\": \"0a8e93271bbbaaebe84741b3df2d185fc114be2e426a310cf3287cce3bdd4fd4\",\n    \"slice_name\": null,\n    \"slice_offset\": 0,\n    \"torch_version\": \"2.13.0+cu130\"\n  },\n  \"noisy\": {\n    \"gain_error_db\": {\n      \"max\": 0.6306023697258273,\n      \"mean\": -0.4835668290045892,\n      \"median\": -0.1118264472939483,\n      \"min\": -9.59227722539997,\n      \"std\": 1.1979742934719233\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 1.075301170349121,\n      \"mean\": 0.9532790620923042,\n      \"median\": 0.9872080385684967,\n      \"min\": 0.33142566680908203,\n      \"std\": 0.09939183819768155\n    },\n    \"si_sdr\": {\n      \"max\": 18.391058303855207,\n      \"mean\": 3.7855505442192454,\n      \"median\": 3.4266913406989303,\n      \"min\": -14.66841880720391,\n      \"std\": 6.278482041839451\n    },\n    \"snr\": {\n      \"max\": 18.443406940795445,\n      \"mean\": 4.194863546819224,\n      \"median\": 3.6320967707058043,\n      \"min\": -9.262449666648337,\n      \"std\": 5.950669727152772\n    },\n    \"stoi\": {\n      \"max\": 0.9984484786514883,\n      \"mean\": 0.7811401725143192,\n      \"median\": 0.8114270809173065,\n      \"min\": 0.2727854426240623,\n      \"std\": 0.1462436116043549\n    }\n  }\n}\n",
+          "experiment_id": "gain_calibration_research_complex_nmse_sisdr_beta_0p03_seed_43",
+          "global_step": 30000,
+          "gpu_metadata": {
+            "device": "cuda",
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch_version": "2.13.0+cu130"
+          },
+          "manifest_fingerprints": {
+            "test": "8e8e0958a96b28b0492cbc0e17be808c138e355fd65b103fabba04050e8b1cf3",
+            "train": "e38622e3e99c6b01d18f0c864f7c331b01d60bf148e1be73dfa2385badad03a6",
+            "val": "6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c"
+          },
+          "max_steps": 30000,
+          "phase": "complete",
+          "resolved_yaml_sha256": "730b14407c7911704e22b62871334900253ddabda8fd81a43930a7257c820a38",
+          "returncode": 0,
+          "scheduler_total_steps": 30000,
+          "schema_version": 1,
+          "seed": 43,
+          "stage": "research",
+          "started_utc": "2026-07-28T01:02:32.982760+00:00",
+          "status": "completed",
+          "stderr_tail": "<local-runtime-redacted>",
+          "stdout_tail": "",
+          "validation_evaluation_sha256": "af761e65067e86ad7905875cff9add416c05d32720f1754d5c86cc6cb828fb0a",
+          "validation_metrics": {
+            "gain_error_db_median": -1.7635024426527046,
+            "projection_gain_median": 0.8162531852722168,
+            "si_sdri": 3.6225042871318776,
+            "snri": 3.9914158662485377,
+            "stoi": 0.7906142902487523
+          }
+        },
+        {
+          "arm": "complex_nmse_sisdr_beta_0p03",
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_59\\best.pth",
+          "checkpoint_sha256": "f3194f87a8b8391e92e92fdfe74160018e4b0f92f696a2160256eb26ed0e5e4f",
+          "config_sha256": "085e0b62491c59842ffb924590d0b6c6de2748abababab8cf9fc04935075f2d1",
+          "elapsed_seconds": 3204.0330384000044,
+          "ended_utc": "2026-07-28T02:52:15.776113+00:00",
+          "evaluation_command": [
+            "<local-runtime-redacted>",
+            "scripts/evaluate.py",
+            "--checkpoint",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_59\\best.pth",
+            "--config",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_59\\resolved_config.yaml",
+            "--manifest",
+            ".\\manifests\\v2\\fold_0_val.jsonl",
+            "--output",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_59\\validation_evaluation.json",
+            "--offset",
+            "0",
+            "--max-items",
+            "500",
+            "--profile",
+            "screen"
+          ],
+          "evaluation_returncode": 0,
+          "evaluation_stderr_tail": "",
+          "evaluation_stdout_tail": "{\n  \"enhanced\": {\n    \"gain_error_db\": {\n      \"max\": 0.03541838710817314,\n      \"mean\": -2.28139374565437,\n      \"median\": -1.770392733163452,\n      \"min\": -13.180196447625985,\n      \"std\": 1.8672826402571414\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 1.0040860176086426,\n      \"mean\": 0.7850042581558228,\n      \"median\": 0.8156059086322784,\n      \"min\": 0.21927553415298462,\n      \"std\": 0.14437052558152313\n    },\n    \"si_sdr\": {\n      \"max\": 20.2027760892766,\n      \"mean\": 7.314315217097579,\n      \"median\": 7.353336091988746,\n      \"min\": -11.15807493210501,\n      \"std\": 5.137601481625037\n    },\n    \"si_sdr_improvement_mean\": 3.5287646728783333,\n    \"snr\": {\n      \"max\": 20.03573493857926,\n      \"mean\": 8.130358811227882,\n      \"median\": 7.830934656080646,\n      \"min\": -1.472715160240769,\n      \"std\": 4.087001809211697\n    },\n    \"snr_improvement_mean\": 3.935495264408658,\n    \"stoi\": {\n      \"max\": 0.9880555495970591,\n      \"mean\": 0.7931276596387048,\n      \"median\": 0.8247218277255024,\n      \"min\": 0.29887814514629873,\n      \"std\": 0.14145459743300315\n    }\n  },\n  \"metadata\": {\n    \"checkpoint\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_59\\\\best.pth\",\n    \"checkpoint_schema_version\": 2,\n    \"checkpoint_sha256\": \"f3194f87a8b8391e92e92fdfe74160018e4b0f92f696a2160256eb26ed0e5e4f\",\n    \"config\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_59\\\\resolved_config.yaml\",\n    \"device\": \"cuda\",\n    \"evaluation_profile\": \"screen\",\n    \"manifest\": \"D:\\\\0. Noise reduce\\\\manifests\\\\v2\\\\fold_0_val.jsonl\",\n    \"manifest_fingerprint\": \"6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c\",\n    \"max_items\": 500,\n    \"schema_version\": 1,\n    \"slice_count\": 500,\n    \"slice_fingerprint\": \"0a8e93271bbbaaebe84741b3df2d185fc114be2e426a310cf3287cce3bdd4fd4\",\n    \"slice_name\": null,\n    \"slice_offset\": 0,\n    \"torch_version\": \"2.13.0+cu130\"\n  },\n  \"noisy\": {\n    \"gain_error_db\": {\n      \"max\": 0.6306023697258273,\n      \"mean\": -0.4835668290045892,\n      \"median\": -0.1118264472939483,\n      \"min\": -9.59227722539997,\n      \"std\": 1.1979742934719233\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 1.075301170349121,\n      \"mean\": 0.9532790620923042,\n      \"median\": 0.9872080385684967,\n      \"min\": 0.33142566680908203,\n      \"std\": 0.09939183819768155\n    },\n    \"si_sdr\": {\n      \"max\": 18.391058303855207,\n      \"mean\": 3.7855505442192454,\n      \"median\": 3.4266913406989303,\n      \"min\": -14.66841880720391,\n      \"std\": 6.278482041839451\n    },\n    \"snr\": {\n      \"max\": 18.443406940795445,\n      \"mean\": 4.194863546819224,\n      \"median\": 3.6320967707058043,\n      \"min\": -9.262449666648337,\n      \"std\": 5.950669727152772\n    },\n    \"stoi\": {\n      \"max\": 0.9984484786514883,\n      \"mean\": 0.7811401725143192,\n      \"median\": 0.8114270809173065,\n      \"min\": 0.2727854426240623,\n      \"std\": 0.1462436116043549\n    }\n  }\n}\n",
+          "experiment_id": "gain_calibration_research_complex_nmse_sisdr_beta_0p03_seed_59",
+          "global_step": 30000,
+          "gpu_metadata": {
+            "device": "cuda",
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch_version": "2.13.0+cu130"
+          },
+          "manifest_fingerprints": {
+            "test": "8e8e0958a96b28b0492cbc0e17be808c138e355fd65b103fabba04050e8b1cf3",
+            "train": "e38622e3e99c6b01d18f0c864f7c331b01d60bf148e1be73dfa2385badad03a6",
+            "val": "6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c"
+          },
+          "max_steps": 30000,
+          "phase": "complete",
+          "resolved_yaml_sha256": "5cbc6487ba4aff68a5cc544d1ea964d179e17b6b00e3499d3b5a83992737a93b",
+          "returncode": 0,
+          "scheduler_total_steps": 30000,
+          "schema_version": 1,
+          "seed": 59,
+          "stage": "research",
+          "started_utc": "2026-07-28T01:59:14.295051+00:00",
+          "status": "completed",
+          "stderr_tail": "<local-runtime-redacted>",
+          "stdout_tail": "",
+          "validation_evaluation_sha256": "228106438a03b2378d524674dbe33457c472351a10bf1d5b392488a3827d637c",
+          "validation_metrics": {
+            "gain_error_db_median": -1.770392733163452,
+            "projection_gain_median": 0.8156059086322784,
+            "si_sdri": 3.5287646728783333,
+            "snri": 3.935495264408658,
+            "stoi": 0.7931276596387048
+          }
+        },
+        {
+          "arm": "complex_nmse_sisdr_beta_0p03",
+          "checkpoint": ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_71\\best.pth",
+          "checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
+          "config_sha256": "b9a3a482a14fce56b9e4e87aae9caba77c1aa38afa04c2e483431b3a683a6424",
+          "elapsed_seconds": 3283.6295143999814,
+          "ended_utc": "2026-07-28T03:47:00.428554+00:00",
+          "evaluation_command": [
+            "<local-runtime-redacted>",
+            "scripts/evaluate.py",
+            "--checkpoint",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_71\\best.pth",
+            "--config",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_71\\resolved_config.yaml",
+            "--manifest",
+            ".\\manifests\\v2\\fold_0_val.jsonl",
+            "--output",
+            ".\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_71\\validation_evaluation.json",
+            "--offset",
+            "0",
+            "--max-items",
+            "500",
+            "--profile",
+            "screen"
+          ],
+          "evaluation_returncode": 0,
+          "evaluation_stderr_tail": "",
+          "evaluation_stdout_tail": "{\n  \"enhanced\": {\n    \"gain_error_db\": {\n      \"max\": 0.3667293436659625,\n      \"mean\": -2.212309009035369,\n      \"median\": -1.6870749578757867,\n      \"min\": -15.631746675614247,\n      \"std\": 1.8512013180223865\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 1.0431252717971802,\n      \"mean\": 0.7907682891786099,\n      \"median\": 0.8234671056270599,\n      \"min\": 0.1653532236814499,\n      \"std\": 0.14195705875415585\n    },\n    \"si_sdr\": {\n      \"max\": 20.338303542521356,\n      \"mean\": 7.452963891502636,\n      \"median\": 7.421143362286896,\n      \"min\": -11.734111051588023,\n      \"std\": 5.143537655260406\n    },\n    \"si_sdr_improvement_mean\": 3.6674133472833903,\n    \"snr\": {\n      \"max\": 20.087089282025275,\n      \"mean\": 8.254631194638034,\n      \"median\": 8.021584058200476,\n      \"min\": -1.4099347297002813,\n      \"std\": 4.107581771377492\n    },\n    \"snr_improvement_mean\": 4.059767647818809,\n    \"stoi\": {\n      \"max\": 0.9872353187391378,\n      \"mean\": 0.7936065247826257,\n      \"median\": 0.8249242188914457,\n      \"min\": 0.28245375024110936,\n      \"std\": 0.142083109924674\n    }\n  },\n  \"metadata\": {\n    \"checkpoint\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_71\\\\best.pth\",\n    \"checkpoint_schema_version\": 2,\n    \"checkpoint_sha256\": \"1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789\",\n    \"config\": \"D:\\\\0. Noise reduce\\\\checkpoints\\\\gain_calibration\\\\research\\\\complex_nmse_sisdr_beta_0p03\\\\seed_71\\\\resolved_config.yaml\",\n    \"device\": \"cuda\",\n    \"evaluation_profile\": \"screen\",\n    \"manifest\": \"D:\\\\0. Noise reduce\\\\manifests\\\\v2\\\\fold_0_val.jsonl\",\n    \"manifest_fingerprint\": \"6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c\",\n    \"max_items\": 500,\n    \"schema_version\": 1,\n    \"slice_count\": 500,\n    \"slice_fingerprint\": \"0a8e93271bbbaaebe84741b3df2d185fc114be2e426a310cf3287cce3bdd4fd4\",\n    \"slice_name\": null,\n    \"slice_offset\": 0,\n    \"torch_version\": \"2.13.0+cu130\"\n  },\n  \"noisy\": {\n    \"gain_error_db\": {\n      \"max\": 0.6306023697258273,\n      \"mean\": -0.4835668290045892,\n      \"median\": -0.1118264472939483,\n      \"min\": -9.59227722539997,\n      \"std\": 1.1979742934719233\n    },\n    \"n\": 500,\n    \"polarity_failure\": {\n      \"max\": 0.0,\n      \"mean\": 0.0,\n      \"median\": 0.0,\n      \"min\": 0.0,\n      \"std\": 0.0\n    },\n    \"projection_gain\": {\n      \"max\": 1.075301170349121,\n      \"mean\": 0.9532790620923042,\n      \"median\": 0.9872080385684967,\n      \"min\": 0.33142566680908203,\n      \"std\": 0.09939183819768155\n    },\n    \"si_sdr\": {\n      \"max\": 18.391058303855207,\n      \"mean\": 3.7855505442192454,\n      \"median\": 3.4266913406989303,\n      \"min\": -14.66841880720391,\n      \"std\": 6.278482041839451\n    },\n    \"snr\": {\n      \"max\": 18.443406940795445,\n      \"mean\": 4.194863546819224,\n      \"median\": 3.6320967707058043,\n      \"min\": -9.262449666648337,\n      \"std\": 5.950669727152772\n    },\n    \"stoi\": {\n      \"max\": 0.9984484786514883,\n      \"mean\": 0.7811401725143192,\n      \"median\": 0.8114270809173065,\n      \"min\": 0.2727854426240623,\n      \"std\": 0.1462436116043549\n    }\n  }\n}\n",
+          "experiment_id": "gain_calibration_research_complex_nmse_sisdr_beta_0p03_seed_71",
+          "global_step": 30000,
+          "gpu_metadata": {
+            "device": "cuda",
+            "gpu": "NVIDIA GeForce RTX 5060 Ti",
+            "torch_version": "2.13.0+cu130"
+          },
+          "manifest_fingerprints": {
+            "test": "8e8e0958a96b28b0492cbc0e17be808c138e355fd65b103fabba04050e8b1cf3",
+            "train": "e38622e3e99c6b01d18f0c864f7c331b01d60bf148e1be73dfa2385badad03a6",
+            "val": "6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c"
+          },
+          "max_steps": 30000,
+          "phase": "complete",
+          "resolved_yaml_sha256": "ca7eec99900b76b131a22ecb07fb665e0e9415fb795bebb3e7951cd64ab7d6e3",
+          "returncode": 0,
+          "scheduler_total_steps": 30000,
+          "schema_version": 1,
+          "seed": 71,
+          "stage": "research",
+          "started_utc": "2026-07-28T02:52:38.511329+00:00",
+          "status": "completed",
+          "stderr_tail": "<local-runtime-redacted>",
+          "stdout_tail": "",
+          "validation_evaluation_sha256": "36808d7ae7fd64fc1f0c8840116390666e1139d9bba1c5e574f90576df8c76be",
+          "validation_metrics": {
+            "gain_error_db_median": -1.6870749578757867,
+            "projection_gain_median": 0.8234671056270599,
+            "si_sdri": 3.6674133472833903,
+            "snri": 4.059767647818809,
+            "stoi": 0.7936065247826257
+          }
+        }
+      ],
+      "schema_version": 1,
+      "seeds": [
+        17,
+        29,
+        43,
+        59,
+        71
+      ],
+      "stage": "research",
+      "status": "completed"
+    },
+    "robustness_matrix": {
+      "baseline_checkpoint_sha256": "0537635e2d5023e956bd0dc7a4d01987f389244dd902249dcf105f451c38d000",
+      "candidate_checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
+      "rows": [
+        {
+          "count": 500,
+          "name": "primary_comparison",
+          "offset": 0,
+          "si_sdri_delta": 0.02755780772283778,
+          "snri_delta": 8.016058431755951,
+          "stoi_delta": 0.01063997902703162
+        },
+        {
+          "count": 500,
+          "name": "primary_audit",
+          "offset": 500,
+          "si_sdri_delta": -0.12537770696115125,
+          "snri_delta": 8.206077944327243,
+          "stoi_delta": 0.010798977729132964
+        },
+        {
+          "count": 500,
+          "name": "robustness_low_offset",
+          "offset": 1000,
+          "si_sdri_delta": 0.0057102730369820165,
+          "snri_delta": 9.247120591968454,
+          "stoi_delta": 0.008436354101714727
+        },
+        {
+          "count": 500,
+          "name": "robustness_mid_offset",
+          "offset": 5000,
+          "si_sdri_delta": -0.023421633425561694,
+          "snri_delta": 7.771145653797666,
+          "stoi_delta": 0.01254238203783431
+        },
+        {
+          "count": 500,
+          "name": "robustness_tail",
+          "offset": 10000,
+          "si_sdri_delta": -0.01131168524755033,
+          "snri_delta": 9.125750026031419,
+          "stoi_delta": 0.009221869015314077
+        }
+      ],
+      "schema_version": 1,
+      "slice_spec": "configs\\evaluation\\research_slices.json",
+      "slices": 5,
+      "status": "pass"
+    },
+    "significance": {
+      "baseline": {
+        "path": "reports\\generated\\research_baseline_primary.json",
+        "sha256": "1d91e89da915b609ac86e44aaa5ee5a0c23e7aad4c3d13998858b12ba256cd6a"
+      },
+      "candidate": {
+        "path": "reports\\generated\\research_candidate_primary.json",
+        "sha256": "f5398b8b0b86f7ed7af1068c271e2c651b8ebc9d5f62ba50643ae4016a694fd8"
+      },
+      "metrics": {
+        "si_sdr": {
+          "bootstrap": {
+            "ci95_high": 0.09994876748639782,
+            "ci95_low": -0.04417549407203177,
+            "mean_delta": 0.02755780772283678,
+            "median_delta": -0.03948304948848369,
+            "n": 500,
+            "resamples": 10000,
+            "seed": 0
+          },
+          "significance": {
+            "cohen_dz": 0.033905962300351894,
+            "n": 500,
+            "p_value": 0.7837654791208097,
+            "statistic": 61738.0,
+            "test": "wilcoxon_signed_rank"
+          }
+        },
+        "snr": {
+          "bootstrap": {
+            "ci95_high": 8.36183788570364,
+            "ci95_low": 7.678102130552164,
+            "mean_delta": 8.01605843175595,
+            "median_delta": 7.51683165253424,
+            "n": 500,
+            "resamples": 10000,
+            "seed": 0
+          },
+          "significance": {
+            "cohen_dz": 2.041599730812563,
+            "n": 500,
+            "p_value": 1.3511457525860685e-83,
+            "statistic": 11.0,
+            "test": "wilcoxon_signed_rank"
+          }
+        },
+        "stoi": {
+          "bootstrap": {
+            "ci95_high": 0.012015159432095007,
+            "ci95_low": 0.009272729091403744,
+            "mean_delta": 0.010639979027031565,
+            "median_delta": 0.007810246579515678,
+            "n": 500,
+            "resamples": 10000,
+            "seed": 0
+          },
+          "significance": {
+            "cohen_dz": 0.6875209457589534,
+            "n": 500,
+            "p_value": 3.5169485991498398e-43,
+            "statistic": 18094.0,
+            "test": "wilcoxon_signed_rank"
+          }
+        }
+      },
+      "paired_items": 500,
+      "schema_version": 1,
+      "status": "pass"
+    }
+  },
+  "manifest": {
+    "status": "pass",
+    "summary": {
+      "clean_files": 171315,
+      "fingerprints": {
+        "test": "8e8e0958a96b28b0492cbc0e17be808c138e355fd65b103fabba04050e8b1cf3",
+        "train": "e38622e3e99c6b01d18f0c864f7c331b01d60bf148e1be73dfa2385badad03a6",
+        "val": "6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c"
+      },
+      "fold": 0,
+      "noise_files": 11537,
+      "schema_version": 2,
+      "seed": 42,
+      "segment_len": 4.0,
+      "speaker_overlap": {
+        "train_test": 0,
+        "train_val": 0,
+        "val_test": 0
+      },
+      "split_files": {
+        "test": 42269,
+        "train": 115694,
+        "val": 13352
+      },
+      "split_speakers": {
+        "test": 220,
+        "train": 790,
+        "val": 88
+      }
+    }
+  },
+  "receipt_type": "research_readiness",
+  "schema_version": 1,
+  "source_sha256": {
+    "failure_analysis.json": "001d34f8f561fffc4ccbf88f1706f4538ec92eb7f95d9b41b838f2cd1b38ad80",
+    "failure_audio.json": "a27ff24d91ff454629ae4f7860c54fbc29fee2abdef33e8690a999f49eccecc2",
+    "research_evaluations.json": "50a01ce0da87fc06bee7480cf524556be58ecbca56492d8d2c1b628f17fa9e8d",
+    "research_selection.json": "6366018fdace239f78fce4dc39de64cbe579a0a8b81f232bbd6fed9777c63633",
+    "research_training.json": "9b7ffb5b3ba3788398ab199a3436eaee790c202b76d11852e9e43570799ca366",
+    "robustness_matrix.json": "10ca3632203a162a9fee55c0730c61a91ebb4f124da35fbeb34e6a5e2228e0c0",
+    "significance.json": "e448939c78de979d07d9e41ce6f09deea8c0f098016e9b112dd1c017c6ec6f2f"
+  },
+  "status": "pass",
+  "timestamp_utc": "2026-07-28T14:34:50.480488+00:00",
+  "verifier": {
+    "checks": {
+      "evaluation_matrix": true,
+      "failure_analysis": true,
+      "failure_audio": true,
+      "required_artifacts": true,
+      "robustness": true,
+      "selection": true,
+      "significance": true,
+      "training_matrix": true
+    },
+    "paths": {
+      "evaluations": ".\\reports\\generated\\research_evaluations.json",
+      "failure_analysis": ".\\reports\\generated\\failure_analysis.json",
+      "failure_audio": ".\\reports\\generated\\failure_audio.json",
+      "robustness": ".\\reports\\generated\\robustness_matrix.json",
+      "selection": ".\\reports\\generated\\research_selection.json",
+      "significance": ".\\reports\\generated\\significance.json",
+      "training": ".\\reports\\generated\\research_training.json"
+    },
+    "research_eligible": true,
+    "schema_version": 1,
+    "status": "pass"
+  }
+}

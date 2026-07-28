@@ -1,0 +1,28 @@
+{
+  "clean_files": 171315,
+  "fingerprints": {
+    "test": "8e8e0958a96b28b0492cbc0e17be808c138e355fd65b103fabba04050e8b1cf3",
+    "train": "e38622e3e99c6b01d18f0c864f7c331b01d60bf148e1be73dfa2385badad03a6",
+    "val": "6aaf80943520536c1a56788cab089393ffa1845b511a625a317179725f8e500c"
+  },
+  "fold": 0,
+  "noise_files": 11537,
+  "schema_version": 2,
+  "seed": 42,
+  "segment_len": 4.0,
+  "speaker_overlap": {
+    "train_test": 0,
+    "train_val": 0,
+    "val_test": 0
+  },
+  "split_files": {
+    "test": 42269,
+    "train": 115694,
+    "val": 13352
+  },
+  "split_speakers": {
+    "test": 220,
+    "train": 790,
+    "val": 88
+  }
+}

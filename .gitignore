@@ -1,0 +1,43 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+data/
+raw_data/
+train-clean-360/
+denoise-audio/data/
+*.zip
+
+checkpoints/
+runs/
+build/
+dist/
+*.spec
+*.egg-info/
+reports/generated/desktop_dist/
+reports/generated/
+tests/_tmp_audio/
+debug-*.log
+.artifacts/
+.serena/
+.cursor/
+
+# Generated/legacy research indexes; reproducible v2 manifests remain tracked.
+manifests/fold_*_manifest.jsonl
+manifests/fold_indices.json
+manifests/method6_*.json
+
+# Exploratory notebook variants and scratch probes.
+notebooks/*Copy*.ipynb
+notebooks/*cuda_fixed*.ipynb
+notebooks/temp_check.py
+
+# Local exploratory outputs; curated public evidence belongs in reports/public/.
+/benchmark_results.png
+/data_demo.png
+/fold_metrics_report.png
+/training_curves.png
+/auto_fix_scan.json
+/auto_fix_report_summary.txt

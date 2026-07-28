@@ -1,0 +1,45 @@
+sr: 16000
+n_fft: 320
+hop: 160
+freq_bins: 161
+clean_root: "D:\\0. Noise reduce\\data\\clean_16k"
+noise_root: "D:\\0. Noise reduce\\data\\noise_16k"
+segment_len: 4.0
+batch_size: 8
+num_workers: 0
+epochs: 150
+lr: 0.0003
+weight_decay: 0.01
+optimizer: "AdamW"
+scheduler: "onecycle"
+mixed_precision: true
+enc_channels: 32
+num_encoder_blocks: 2
+gru_hidden: 64
+gru_layers: 1
+k_tap: 3
+activation: "silu"
+loss: "complex_nmse_sisdr"
+alpha_loss: 1.0
+beta_si_sdr: 0.03
+snr_range: [-10.0, 20.0]
+p_rir: 0.35
+p_vary: 0.4
+cache_mixtures: false
+seed: 71
+n_val: 500
+steps_per_epoch: 200
+save_every_n_steps: 500
+compute_stoi: true
+compute_pesq: false
+metric_max_items: 500
+loss_eps: 1e-08
+sisdr_warmup_start: 500
+sisdr_warmup_end: 1000
+compression_exponent: 0.3
+compression_complex_weight: 0.3
+checkpoint_dir: "D:\\0. Noise reduce\\checkpoints\\gain_calibration\\research\\complex_nmse_sisdr_beta_0p03\\seed_71"
+max_steps: 30000
+scheduler_total_steps: 30000
+selection_metric: "si_sdr_improvement"
+experiment_id: "gain_calibration_research_complex_nmse_sisdr_beta_0p03_seed_71"

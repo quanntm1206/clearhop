@@ -1,0 +1,18 @@
+clean:
+  - id: vivos
+    kaggle_handle: kynthesis/vivos-vietnamese-speech-corpus-for-asr
+    local_path: data/clean
+    description: "VIVOS Vietnamese Speech Corpus (clean speech)"
+    required: true
+
+noise:
+  - id: demand
+    kaggle_handle: chrisfilo/demand
+    local_path: denoise-audio/data/processed/noise_realtime
+    description: "DEMAND noise dataset"
+    required: true
+  - id: musan
+    kaggle_handle: dogrose/musan-dataset
+    local_path: denoise-audio/data/processed/noise_realtime/musan
+    description: "MUSAN noise dataset (optional)"
+    required: false

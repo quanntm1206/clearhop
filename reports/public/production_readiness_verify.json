@@ -1,0 +1,226 @@
+{
+  "benchmark": {
+    "checkpoint": ".\\checkpoints\\production\\best.pth",
+    "checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
+    "device": "cpu",
+    "environment": {
+      "affinity_cpu": 0,
+      "machine": "AMD64",
+      "os": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+      "torch_threads": 1,
+      "torch_version": "2.13.0+cu130"
+    },
+    "hop_samples": 160,
+    "hop_seconds": 0.01,
+    "iterations": 5000,
+    "memory": {
+      "rss_delta_bytes": -516096,
+      "rss_end_bytes": 559894528,
+      "rss_start_bytes": 560410624
+    },
+    "model_parameters": 72039,
+    "neural_core": {
+      "max_ms": 35.2067,
+      "mean_ms": 3.0260986400000003,
+      "n": 5000,
+      "p50_ms": 2.8455,
+      "p95_ms": 3.63652,
+      "p99_ms": 4.298817000000002,
+      "realtime_factor": 3.304584942412849
+    },
+    "onnx": ".\\checkpoints\\production\\export.onnx",
+    "onnx_core": {
+      "max_ms": 12.5027,
+      "mean_ms": 1.7062145000000002,
+      "n": 5000,
+      "p50_ms": 1.6406999999999998,
+      "p95_ms": 2.147705,
+      "p99_ms": 2.4193310000000006,
+      "realtime_factor": 5.8609278024539115
+    },
+    "onnx_sha256": "806fb5f6bf23c4e74c781bea5544e63bc5307902f0ec7f4dbd667640853c441b",
+    "schema_version": 1,
+    "status": "pass",
+    "streaming_end_to_end": {
+      "max_ms": 31.1058,
+      "mean_ms": 3.32864764,
+      "n": 5000,
+      "p50_ms": 3.15195,
+      "p95_ms": 3.96217,
+      "p99_ms": 4.706512000000009,
+      "realtime_factor": 3.0042230603897746
+    },
+    "thresholds": {
+      "streaming_p95_ms_lt": 10.0
+    },
+    "warmup": 500
+  },
+  "bundle": {
+    "checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
+    "files": {
+      "README.txt": {
+        "bytes": 140,
+        "sha256": "e2df91acf0c2994fdaf491585199dd2d599428bfd9982507a441000a6ed817bd"
+      },
+      "checkpoint.pth": {
+        "bytes": 931173,
+        "sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789"
+      },
+      "config.yaml": {
+        "bytes": 1101,
+        "sha256": "ca7eec99900b76b131a22ecb07fb665e0e9415fb795bebb3e7951cd64ab7d6e3"
+      },
+      "enhance_cpu.py": {
+        "bytes": 2984,
+        "sha256": "ac330d06de57ceb3ebf61dad27bcea22f3422d9d308b331cd781195e970e9c15"
+      },
+      "model.onnx": {
+        "bytes": 321594,
+        "sha256": "806fb5f6bf23c4e74c781bea5544e63bc5307902f0ec7f4dbd667640853c441b"
+      },
+      "model.ts": {
+        "bytes": 379770,
+        "sha256": "9a0edce43b817374bed9ad363aad97b9466839484fbd7fda5699805d946e9c5a"
+      },
+      "pyproject.toml": {
+        "bytes": 555,
+        "sha256": "55445211789829d04a71ad2c2d0f032b972cb3d00b026087cd49fd22b6faa557"
+      },
+      "src/__init__.py": {
+        "bytes": 63,
+        "sha256": "299da04435c7aa5520318c8027584f47ef89e96a094aa1d01bed116b98fabfa9"
+      },
+      "src/augment.py": {
+        "bytes": 14554,
+        "sha256": "9043d039c65a4764ae14966e892e70dd2cba769efa4c17c2ceea5f168679842c"
+      },
+      "src/checkpoint.py": {
+        "bytes": 1761,
+        "sha256": "4a29c5687769a95bdc3f167623363ebc170717bd862fb9bd58568431c728456d"
+      },
+      "src/config.py": {
+        "bytes": 9761,
+        "sha256": "0b610163382a4d3a3003e6ca49e35b35b5f09551f295c426fed185a07ce48586"
+      },
+      "src/dataset.py": {
+        "bytes": 7498,
+        "sha256": "dd6b874029696160f310ba3df36c535cb07156d9c0a18333f93fc06b853a4ac3"
+      },
+      "src/evaluate.py": {
+        "bytes": 7512,
+        "sha256": "06cc6f34be599ab88db291cab96e28eebb4c95d0e0988c341b33a3ebf6564c47"
+      },
+      "src/export.py": {
+        "bytes": 3407,
+        "sha256": "e8e6616388d26884ce639690bc6e9c66189dc5aadac910aefc348e55b5e71992"
+      },
+      "src/filtering.py": {
+        "bytes": 5814,
+        "sha256": "50841c6fefcc10b29f01c2dacc7c8a49d59b64aef63f41b664fcf7dca22f14b6"
+      },
+      "src/inference.py": {
+        "bytes": 4551,
+        "sha256": "4db08e0914f1baa41abb3f611c9ccb08962d8f4914fe175c989e9166ca5643ac"
+      },
+      "src/losses.py": {
+        "bytes": 4192,
+        "sha256": "9738574443deda6a8b5e51b9a3675659390ff55726b61ad4417748ae482a4590"
+      },
+      "src/mobileone.py": {
+        "bytes": 11978,
+        "sha256": "f714dd15940ca9598af442487dbcc40bf0d59ea63a8866a6daf462163cf52c79"
+      },
+      "src/model.py": {
+        "bytes": 8387,
+        "sha256": "9ef1678d8aa1a58044a9a810dc48a929aa9ce733b846f31ff523f777ce1ee685"
+      },
+      "src/splits.py": {
+        "bytes": 6057,
+        "sha256": "ff6e2397f94cec302c5673cd0d08141d327b8053c50c03b04e46a058b1bb0640"
+      },
+      "src/statistics.py": {
+        "bytes": 2546,
+        "sha256": "ae04ea4024906fedd2d6472d2fd6cd3cf5864878ea9a06cea66e1998ee275a9c"
+      },
+      "src/streaming_stft.py": {
+        "bytes": 5682,
+        "sha256": "97e07fa8cb2eedb2b86dfcf161e9881d8a96f0d74cf34b105a7531f940fc269c"
+      },
+      "src/trainer.py": {
+        "bytes": 33277,
+        "sha256": "56fa1ad88479a4fbcd87ec0428e328bedc9f42bf44154100bda516c0602b1b35"
+      },
+      "src/utils.py": {
+        "bytes": 8547,
+        "sha256": "17d9cb7fd58d8467d658f4015c05431aee5c9793474eaedd718cc1e550ff3e67"
+      }
+    },
+    "schema_version": 1
+  },
+  "receipt_type": "production_readiness",
+  "schema_version": 1,
+  "soak": {
+    "checkpoint": ".\\checkpoints\\production\\best.pth",
+    "checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
+    "device": "cpu",
+    "elapsed_seconds": 7200.0,
+    "environment": {
+      "os": "Windows-11-10.0.26200-SP0",
+      "torch_threads": 1,
+      "torch_version": "2.13.0+cu130"
+    },
+    "failures": [],
+    "faults": {
+      "empty": true,
+      "nan": true,
+      "wrong_shape": true
+    },
+    "iterations": 2292681,
+    "memory": {
+      "bounded": true,
+      "rss_end_bytes": 519880704,
+      "rss_start_bytes": 521662464
+    },
+    "requested_seconds": 7200.0,
+    "reset": {
+      "frames_after": 0,
+      "frames_before": 2292681,
+      "idempotent": true
+    },
+    "schema_version": 1,
+    "status": "pass"
+  },
+  "source_sha256": {
+    "bundle.json": "371acd15ab0a2b8d7fda796ee498dfd3b1530907fa54673f8d2343a75e1b85de",
+    "cpu_benchmark.json": "252326109566d1949d647f3ce19ae81f308da0926d9d9b2ca830948fdbf08f3e",
+    "cpu_soak.json": "6575717c023ba2f2d5b29876390bcb637e19b8d5b235ef61bb756ff298a3630f"
+  },
+  "status": "pass",
+  "timestamp_utc": "2026-07-28T14:34:36.353436+00:00",
+  "verifier": {
+    "checks": {
+      "bundle_integrity": true,
+      "cpu_benchmark": true,
+      "cpu_soak": true,
+      "export_hashes": true,
+      "export_structure": true,
+      "required_artifacts": true,
+      "runtime_smoke": true
+    },
+    "paths": {
+      "bundle": ".\\artifacts\\cpu_bundle\\bundle.json",
+      "checkpoint": ".\\checkpoints\\production\\best.pth",
+      "cpu_benchmark": ".\\reports\\generated\\cpu_benchmark.json",
+      "cpu_soak": ".\\reports\\generated\\cpu_soak.json",
+      "metadata": ".\\checkpoints\\production\\export.json",
+      "onnx": ".\\checkpoints\\production\\export.onnx",
+      "parity": ".\\reports\\generated\\production_export_parity.json",
+      "runtime_smoke": ".\\reports\\generated\\cpu_runtime_smoke.json",
+      "torchscript": ".\\checkpoints\\production\\export.ts"
+    },
+    "production_eligible": true,
+    "schema_version": 1,
+    "status": "pass"
+  }
+}

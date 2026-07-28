@@ -1,0 +1,49 @@
+sr: 16000
+n_fft: 320
+hop: 160
+freq_bins: 161
+segment_len: 4.0
+
+clean_root: data/clean_16k
+noise_root: data/noise_16k
+
+batch_size: 8
+num_workers: 0
+epochs: 150
+
+lr: 3.0e-4
+weight_decay: 1.0e-2
+optimizer: AdamW
+scheduler: onecycle   # onecycle or cosine
+mixed_precision: true
+
+# Model
+enc_channels: 32
+num_encoder_blocks: 2
+gru_hidden: 64
+gru_layers: 1
+k_tap: 3
+activation: silu
+
+# Loss
+loss: complex_mse_plus_si_sdr
+alpha_loss: 1.0
+beta_si_sdr: 0.5
+
+# Mixing / augmentation
+snr_range: [-10, 20]
+p_rir: 0.35
+p_vary: 0.4
+cache_mixtures: false
+seed: 42
+
+# Validation
+n_val: 100
+# Optional expensive metrics; keep disabled during long training.
+compute_stoi: false
+compute_pesq: false
+metric_max_items: 0
+
+# Training control
+steps_per_epoch: 200
+save_every_n_steps: 500
