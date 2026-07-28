@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 import tempfile
@@ -143,8 +144,12 @@ def _docker_build(root: Path, output_dir: Path) -> None:
     command.append(str(root))
     subprocess.run(command, cwd=root, check=True)
     output_dir.mkdir(parents=True, exist_ok=True)
+    run_command = ["docker", "run", "--rm"]
+    if os.name != "nt":
+        run_command.extend(("--user", f"{os.getuid()}:{os.getgid()}"))
+    run_command.extend(("--volume", f"{output_dir.resolve()}:/export", tag, "sh", "-c", "cp -a /out/. /export/"))
     subprocess.run(
-        ["docker", "run", "--rm", "--volume", f"{output_dir.resolve()}:/export", tag, "sh", "-c", "cp -a /out/. /export/"],
+        run_command,
         cwd=root,
         check=True,
     )
