@@ -23,6 +23,7 @@ jobs:
       - name: Public production evidence verifier
         run: python scripts/verify_public_production.py
       - name: Rebuild and verify pinned RNNoise recipe
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: python scripts/verify_rnnoise_build.py --rebuild
       - name: Public research evidence verifier
         run: python scripts/verify_public_research.py

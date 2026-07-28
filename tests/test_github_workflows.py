@@ -31,6 +31,13 @@ def test_ci_avoids_duplicate_feature_branch_runs() -> None:
     assert "pull_request:" in text
 
 
+def test_rnnoise_rebuild_runs_only_after_merge_to_main() -> None:
+    text = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+    step = text[text.index("Rebuild and verify pinned RNNoise recipe") :]
+    assert "if: github.event_name == 'push' && github.ref == 'refs/heads/main'" in step
+    assert "python scripts/verify_rnnoise_build.py --rebuild" in step
+
+
 def test_ci_runs_clean_offline_installer_and_real_denoise_outside_repo() -> None:
     text = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
     installer_step = text[text.index("Clean offline installer integration") :]
