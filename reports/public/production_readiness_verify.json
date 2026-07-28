@@ -60,16 +60,16 @@
     "checkpoint_sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789",
     "files": {
       "README.txt": {
-        "bytes": 140,
-        "sha256": "e2df91acf0c2994fdaf491585199dd2d599428bfd9982507a441000a6ed817bd"
+        "bytes": 138,
+        "sha256": "b02b5ae53db3ff9051bd0e1d5ba08add1b62813529d441ca2a1bebfc9a7af4d4"
       },
       "checkpoint.pth": {
         "bytes": 931173,
         "sha256": "1305037b59438b1679f6202762001f52f5fb5bd80d6a7ee0e184bc7af46e4789"
       },
       "config.yaml": {
-        "bytes": 1101,
-        "sha256": "ca7eec99900b76b131a22ecb07fb665e0e9415fb795bebb3e7951cd64ab7d6e3"
+        "bytes": 1056,
+        "sha256": "2500ff84e5de6247c58f0e893118825b936b7147b1abe26b2f1f748b706c5e90"
       },
       "enhance_cpu.py": {
         "bytes": 2984,
@@ -92,8 +92,8 @@
         "sha256": "0e690d26aeeccc16e1ba6b1e093abe47576a8ddb07629ed1961c47fc68952901"
       },
       "src/augment.py": {
-        "bytes": 14552,
-        "sha256": "5cb44b6ed0201066d73fd4027c6d0590d51eeeb3ff8606c6880cd1cf69682f27"
+        "bytes": 14225,
+        "sha256": "27ac73427b6a80abf5fbbecdc5838f5c0e1dc86e2dc2bf300064a9bdda96fba6"
       },
       "src/checkpoint.py": {
         "bytes": 1761,
@@ -104,8 +104,8 @@
         "sha256": "0b610163382a4d3a3003e6ca49e35b35b5f09551f295c426fed185a07ce48586"
       },
       "src/dataset.py": {
-        "bytes": 7495,
-        "sha256": "9bb5fc8990b2bab33960a20051b61636303812753272b2ca75d513269c67e1a9"
+        "bytes": 7359,
+        "sha256": "2e785a6ec8cc72c291f9ed8c5e90de4591e65a2bf895c6ef80df634b9a020b74"
       },
       "src/evaluate.py": {
         "bytes": 7512,
@@ -116,8 +116,8 @@
         "sha256": "e8e6616388d26884ce639690bc6e9c66189dc5aadac910aefc348e55b5e71992"
       },
       "src/filtering.py": {
-        "bytes": 5812,
-        "sha256": "91db75613bfc79a32e485c85ef4bed481ec07b0ce47029814eafc91d0a4fe83a"
+        "bytes": 5703,
+        "sha256": "ab0cd19499e111b04fc003ccf244c52648d50fbf2dc1b8151bb762c752d4a60b"
       },
       "src/inference.py": {
         "bytes": 4551,
@@ -128,12 +128,12 @@
         "sha256": "9738574443deda6a8b5e51b9a3675659390ff55726b61ad4417748ae482a4590"
       },
       "src/mobileone.py": {
-        "bytes": 11975,
-        "sha256": "a85d20ea937edc24f706da9f487eb82a41468044fd2a829a733e5a616de60f7c"
+        "bytes": 11748,
+        "sha256": "12d0432ca3de8d1fe53c7b1280c36ea4fddf35b9e3c41d9ff72e41324461f069"
       },
       "src/model.py": {
-        "bytes": 8384,
-        "sha256": "d32523ed6d7c68e50fb09f6d30a1932eb0d8b497cb7f49726ee37736343cafb8"
+        "bytes": 8209,
+        "sha256": "b294ee195ea058cb324495ae8e9579f45f9b47fe742fbbd2540bb5f6efbf5f09"
       },
       "src/splits.py": {
         "bytes": 6057,
@@ -144,23 +144,23 @@
         "sha256": "ae04ea4024906fedd2d6472d2fd6cd3cf5864878ea9a06cea66e1998ee275a9c"
       },
       "src/streaming_stft.py": {
-        "bytes": 5679,
-        "sha256": "609d4c13f3e09df55910b8682c19de3f146cba3467ab9a569ffbe87f3793236c"
+        "bytes": 5526,
+        "sha256": "c5bd8e4d2c6f84fd44fbe0c1af007bcc2c09aad37dd8208ad175904e99333f61"
       },
       "src/trainer.py": {
-        "bytes": 33274,
-        "sha256": "4656943423d6a97866de55550a09a6a913186a90b22c1f609b9cf573fe51f0e5"
+        "bytes": 32774,
+        "sha256": "e307b09bcebffb0476e27b386f9afdcf34dc4e98374eb8a3f460e1467dc29b13"
       },
       "src/utils.py": {
-        "bytes": 8544,
-        "sha256": "5d620657334a388363b469b5e4f9e73eed8268f304d511413968b2dd801b08a1"
+        "bytes": 8285,
+        "sha256": "eacf8a252952d13f17a76a2edd6ce71df2388c473f745c6e027fd1096d2edb6e"
       }
     },
     "schema_version": 1
   },
   "embedded_sha256": {
     "benchmark": "024f2daa61ed0470a1fda15dd07085765935a622da2c8a45b41c91727c86a1f2",
-    "bundle": "4f2aced87eacee03a5afa327fb6dd8cc239ab284c09f927eeef271ba1143b3fd",
+    "bundle": "86a882e326a2326a5533e573410b3703744217844a00a0aeea7b0ddde5a0f8fb",
     "soak": "0d51933ca5e8fa328a5f7104bc6c4d4e4651ad842d9e10b8117692e1f016ef16",
     "verifier": "e9862647181c9ec2c68f49b4b55b9ecf5efc82d2f396afd47b90d5d19c25b51c"
   },
@@ -198,7 +198,7 @@
     "status": "pass"
   },
   "source_sha256": {
-    "bundle.json": "58d0f8234983c52326ebcf52d40aed753de4b2142d81aa83ca22c187794755ef",
+    "bundle.json": "bf292b8807ee68d63fdb51775c8f6c2d97876f8ca8eda3933028b8eca4a9463c",
     "cpu_benchmark.json": "252326109566d1949d647f3ce19ae81f308da0926d9d9b2ca830948fdbf08f3e",
     "cpu_soak.json": "6575717c023ba2f2d5b29876390bcb637e19b8d5b235ef61bb756ff298a3630f"
   },
