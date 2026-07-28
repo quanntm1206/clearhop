@@ -1159,9 +1159,12 @@ def publish_readiness(root: Path) -> dict[str, object]:
         "8. Limitation of Liability.",
         "9. Accepting Warranty or Additional Liability.",
         "END OF TERMS AND CONDITIONS",
+        "You may obtain a copy of the License at",
+        "http://www.apache.org/licenses/LICENSE-2.0",
+        "limitations under the License.",
     )
-    checks["license_spdx"] = len(license_text) >= 10_000 and all(marker in license_text for marker in apache_markers)
-    checks["required_documents"] = checks["license_spdx"] and all(
+    checks["license_spdx"] = all(marker in license_text for marker in apache_markers)
+    checks["required_documents"] = all(
         (root / path).is_file() and bool((root / path).read_text(encoding="utf-8", errors="replace").strip())
         for path in required_docs
     )
@@ -1299,7 +1302,7 @@ def publish_readiness(root: Path) -> dict[str, object]:
     scores = {name: round(10.0 * sum(checks.get(key, False) for key in group) / len(group), 2) for name, group in (("github", github_checks), ("production", production_checks), ("research", research_checks))}
     research_caps = {"two_reproduced": 10.0, "one_plus_recipe": 9.0, "insufficient": 8.0}
     scores["research"] = min(scores["research"], research_caps.get(str(research_coverage["tier"]), 8.0))
-    status = "pass" if all(score >= 9.0 for score in scores.values()) else "fail"
+    status = "pass" if checks["license_spdx"] and all(score >= 9.0 for score in scores.values()) else "fail"
     return {
         "schema_version": 1,
         "status": status,
