@@ -28,7 +28,7 @@ jobs:
       - name: Desktop headless smoke
         env:
           QT_QPA_PLATFORM: offscreen
-        run: python -m pytest -q tests/test_desktop_e2e.py tests/test_desktop_app.py
+        run: python -m pytest -q tests/test_desktop_app.py
 
   windows:
     runs-on: windows-latest

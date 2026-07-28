@@ -11,9 +11,10 @@ import soundfile as sf
 
 
 os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
-pytest.importorskip("PySide6")
-
-from PySide6.QtWidgets import QApplication, QFileDialog
+try:
+    from PySide6.QtWidgets import QApplication, QFileDialog
+except ImportError as exc:  # Linux runners may lack Qt's native EGL libraries.
+    pytest.skip(f"Qt runtime unavailable: {exc}", allow_module_level=True)
 
 from desktop.app import MainWindow
 from desktop.pipeline import DenoisePipeline

@@ -264,6 +264,7 @@ def _resolve_inside(root: Path, value: object) -> Path:
 
 
 def _artifact_ref(root: Path, path: Path) -> dict[str, str]:
+    root = Path(root).resolve()
     resolved = _resolve_inside(root, path)
     if not resolved.is_file():
         raise FileNotFoundError(f"Artifact missing: {resolved}")

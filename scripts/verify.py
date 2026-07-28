@@ -303,6 +303,12 @@ def gain_calibration_artifact_audit(root: Path) -> dict[str, object]:
             model.load_state_dict(state["model"], strict=True)
             return state
 
+        def same_path(left: object, right: Path) -> bool:
+            try:
+                return Path(str(left)).samefile(right)
+            except OSError:
+                return Path(str(left)).resolve() == right.resolve()
+
         def metric(evaluation: dict[str, object], name: str, statistic: str = "mean") -> float:
             enhanced = evaluation.get("enhanced")
             if not isinstance(enhanced, dict):
@@ -528,7 +534,7 @@ def gain_calibration_artifact_audit(root: Path) -> dict[str, object]:
                     and parsed_yaml.get("experiment_id") == expected_experiment
                     and int(parsed_yaml.get("max_steps", -1)) == 30000
                     and int(parsed_yaml.get("scheduler_total_steps", -1)) == 30000
-                    and Path(str(parsed_yaml.get("checkpoint_dir"))).resolve() == expected_run_dir
+                    and same_path(parsed_yaml.get("checkpoint_dir"), expected_run_dir)
                     and all(parsed_yaml.get(key) == _EXPECTED_LOSS_CONFIGS.get(str(selected_arm), {}).get(key) for key in _LOSS_KEYS)
                     and all(resolved.get(key) == parsed_yaml.get(key) for key in (*_LOSS_KEYS, "seed", "experiment_id", "max_steps", "scheduler_total_steps", "checkpoint_dir"))
                 )
