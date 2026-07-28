@@ -4,6 +4,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_desktop_build_copies_and_verifies_project_license() -> None:
+    text = (ROOT / "scripts/build-desktop.ps1").read_text(encoding="utf-8")
+    for token in (
+        'Join-Path $ReleaseRoot "LICENSE"',
+        "Copy-Item -LiteralPath $LicenseSource",
+        "Get-FileHash -LiteralPath $LicenseSource",
+        "Get-FileHash -LiteralPath $LicenseTarget",
+        "Packaged license hash mismatch",
+    ):
+        assert token in text
+
+
 def test_ci_installs_desktop_and_runs_fail_closed_gates() -> None:
     text = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
     for token in (
