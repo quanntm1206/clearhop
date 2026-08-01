@@ -6,7 +6,7 @@ cffi==2.1.0
 colorama==0.4.6
 filelock==3.29.0
 flatbuffers==25.12.19
-fsspec==2026.4.0
+fsspec==2026.7.0
 grpcio==1.83.0
 iniconfig==2.3.0
 Jinja2==3.1.6
